@@ -9,14 +9,15 @@ class Logout extends CI_controller
 		{
 			session_unset();
 			session_destroy();
-
-			header("location: $home ");
+			header("location: $home");
+			exit();
 		}
 		elseif(isset($_COOKIE['id']))
 		{
 			$id = $_COOKIE['id'];
 			setcookie('id',$id,time()-10,'/');
-			header("location: $home ");
+			header("location: $home");
+			exit();
 		}
 	}
 }
