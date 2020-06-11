@@ -14,7 +14,7 @@ $this->load->view('menus/main_menu');
   }
   elseif($view == "jobs")
   {
-    $this->load->view("dashboard_views/$view");
+    $this->load->view("dashboard_views/$view",$jobs);
   }
   else
   {

@@ -19,15 +19,20 @@ class Dashboard extends CI_Controller
 					$data['jobs'] = array();
 					if ($account_type == "buyer")
 					{
-						$data['jobs'] = $this->Select->get_content($rows="*",$table="jobs",
+						$rows = 'id,title,category,job_status,budget,bids';
+						$data['jobs'] = $this->Select->get_content($rows,$table="jobs",
 						$where_condition=true,$where_part ="id=$id",
 						$order_by ='id DESC',$limit= 10000);
 					}
 					elseif($account_type == 'seller')
 					{
-						$data['jobs'] = $this->Select->get_joined_data($columns="",$tables,$joining_columns,
-						$order_by =null,$limit=null,	$where_condition= false,
-						$where_columns=null);
+						$columns = 'jobs.id,jobs.title,jobs.category,jobs.job_status,users.first_name,employments.employment_amount';
+						$tables = array('jobs','users','employments');
+						$joining_columns = array('jobs.buyer_user_id = users.id','jobs.id = employments.job_id');
+						$where_columns = "employments.seller_user_id = '$id'";
+						$data['jobs'] = $this->Select->get_joined_data($columns,$tables,$joining_columns,
+						$order_by ='order  by employments.id DESC',$limit='limit 1000000',	$where_condition= true,
+						$where_columns);
 					}
 					break;
 				case 'settings':
