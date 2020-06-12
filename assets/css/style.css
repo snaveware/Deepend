@@ -20,6 +20,7 @@ body{
 	background-color: var(--base-bg-color-2);
 	margin: 0;
 	padding: 0;
+	overflow-x: hidden;
 }
 .just-heading-1{
 	color:var(--base-text-color-2);
@@ -103,28 +104,41 @@ color: var(--base-link-color-1);
 	margin: 5px;
 	cursor: pointer;
 }
-.list-d,.list-d-a {
+.list-d{
 	list-style: none;
 	background-color: var(--base-bg-color-1);
 
 }
-.list-d li,.list-d-a li{
+.list-d li{
 	color: var(--base-text-color-1);
 	background-color: var(--base-button-color);
 	margin: 5px;
 	padding: 8px 10px;
 }
-.list-d li:hover,.list-d-a li:hover{
+.list-d-a{
+	width: 80%;
+}
+.list-d-a li{
+	list-style-type: none;
+	margin:20px;
+	width: 100%;
+}
+
+.list-d-a li a{
+	color:var(--base-bg-color-1);
+	background-color: var(--base-button-color);
+	text-align: center;
+	min-width:100% !important;
+	text-decoration: none;
+	margin: 5px auto;
+	padding: 8px 10px;
+}
+.list-d li:hover,.list-d-a li a:hover{
 	background-color: var(--base-text-color-2);
 	border: 0.5px dotted var(--base-bg-color-2);
 	cursor: pointer;	
 }
-.list-d-a li a{
-	color:var(--base-bg-color-1);
-	text-align: center;
-	text-decoration: none;
-	margin: 0 auto;
-}
+
 .list-e{
 	background-color: var(--base-bg-color-1);
 	list-style-type: none;
@@ -545,10 +559,11 @@ list-style-type: none;
 	justify-content: space-between;
 	background-color: transparent;
 	width: 100%;
+	margin-bottom:20px;
 }
 #sidebar{
 	width: 20%;
-	height: 100%;
+	min-height: 80vh;
 	background-color: var(--base-bg-color-1);
 	padding: 5px;
 	border-radius: 2px;

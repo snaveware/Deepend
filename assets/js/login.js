@@ -46,10 +46,10 @@ loginForm.addEventListener('submit',e=>{
 						<span class="caret"></span>
 					</div>
 					<ul class = "list-e" id="list-e">
-						<li><a href="dashboard/profile"> <i style="padding:5px;" class="fa fa-user"></i> Profile</a></li>
-						<li><a href="#"><i style="padding:5px;" class="fa fa-wrench"></i>Jobs</a></li>
-						<li><a href="#"><i style="padding:5px;" class="fa fa-cog"></i>Settings</a></li>
-						<li><a  href="logout"><i style="padding:5px;" class="fa fa-sign-out"></i>logout</a></li>
+						<li><a href="dashboard/"> <i style="padding:5px;" class="fa fa-user"></i> Profile</a></li>
+						<li><a href="dashboard/jobs"><i style="padding:5px;" class="fa fa-wrench"></i>Jobs</a></li>
+						<li><a href="dashboard/settings"><i style="padding:5px;" class="fa fa-cog"></i>Settings</a></li>
+						<li><a  href="${document.getElementById('base-url').innerHTML}logout"><i style="padding:5px;" class="fa fa-sign-out"></i>logout</a></li>
 					</ul>
 				</div>`
 			}

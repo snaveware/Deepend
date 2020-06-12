@@ -14,7 +14,7 @@ alt="profile picture">
 <h3 class="heading-2"><?= $rating?></h3>
 <ul class="list-d-a ">
 <li>
-<a href="<?=base_url()?>dashboard/jobs">Jobs</a>
+<a href="<?=base_url()?>dashboard/jobs">Jobs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
 </li>
 <li>
 <a href="<?=base_url()?>dashboard/settings">Settings</a>
@@ -23,7 +23,7 @@ alt="profile picture">
   if($account_type == "seller")
   {?>
   <li>
-    <a href="<?=base_url()?>dashboard/gigs">Gigs</a>
+    <a href="<?=base_url()?>dashboard/gigs">Gigs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
   </li>
   <?php
   }

@@ -2,12 +2,10 @@
 $account_type = get_details('account_type');
 if(!count($jobs)<1)
 {
-if($account_type =='seller')
+  if($account_type =='seller')
   {
     ?>
     <table id="user-jobs-table">
-      <?php
-      ?>
       <tr class="table-title-row">
         <td>Job Id</td>
         <td>Job Title</td>
@@ -16,8 +14,9 @@ if($account_type =='seller')
         <td>Employer Name</td>
         <td>Earnings</td>
       </tr>
-      <?php
-      for ($i=0; $i <count($jobs) ; $i++) { 
+      <?php    
+      for ($i=0; $i <count($jobs) ; $i++) 
+      { 
         ?>
         <tr job-id = "<?= $jobs[$i]['id']?>" class="job-row">
           <?php
@@ -32,19 +31,18 @@ if($account_type =='seller')
         <?php
       }
       ?>
-    </table">
-    <?php
+    </table>
+    <?php  
   }
   elseif($account_type == 'buyer')
   {
     ?>
+    <script src="<?= base_url()?>assets/js/userJobs.js"></script>
     <p>
       <a class="btn" style="text-decoration:none;margin:5px;" href="<?=base_url()?>dashboard/jobs">Jobs</a>
       <a class="btn"style="text-decoration:none;margin:5px;" href="<?=base_url()?>dashboard/jobs/new">New Job</a>
     </p>
     <table id="user-jobs-table">
-      <?php
-      ?>
       <tr class="table-title-row">
         <td>Job Id</td>
         <td>Job Title</td>
@@ -85,5 +83,3 @@ else
 }
 //print_r($jobs);
 ?>
-
-<script src="<?= base_url()?>assets/js/userJobs.js"></script>
