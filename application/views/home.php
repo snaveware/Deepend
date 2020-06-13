@@ -13,8 +13,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<h4 class="heading-2"><?php echo $sub_heading;?></h4>
 		</div>
 		<div id="users" >
-			<ul id="slidesContainer" class="list-f">
-			<ul>
+			<!--<ul id="slidesContainer" class="list-f">
+			<ul>-->
+				
 		</div>
 	</div>
 	<script src="<?= base_url()?>assets/js/home.js"></script>

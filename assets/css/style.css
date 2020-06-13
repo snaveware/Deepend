@@ -542,9 +542,7 @@ list-style-type: none;
 	position: relative;
 	top: 20vh;
 	overflow: hidden;
-	transform:rotate(-23deg);
 	background: transparent;
-	border-radius: 40%;
 	height: max-content;
 }
 
@@ -703,4 +701,99 @@ list-style-type: none;
 .table-title-row td{
 	color:var(--base-text-color-1) !important;
 	font-size: 1rem;
+}
+#signup{
+	height:max-content;
+	margin: 0;
+	padding:0;
+}
+#signup-image-container,#signup-form{
+	min-height:100%;
+	min-width:50%;
+	margin:0;
+	padding:0;
+}
+#signup-image-container img{
+width: 100%;
+height:100%;
+object-fit: cover;
+}
+#signup-form{
+	padding-left:3vw;
+	padding-bottom:2vh;
+	background-color:var(--base-bg-color-1);
+	color:var(--base-link-color-2);
+}
+#signup-form input,#signup-form textarea{
+	background: transparent;
+	border:none;
+}
+#signup-form input:focus,#signup-form textarea:focus{
+	outline-style: none;
+}
+#signup-form div{
+	width:60%;
+	padding:5px;
+	margin:5px auto;
+	border-bottom:0.5px solid var(--base-outline-color);
+}
+#account-type-list{
+	background-color: var(--base-bg-color-1);
+	box-shadow: 1px 2px 6px var(--base-bg-color-3);
+	margin:10px auto;
+	padding:10px;
+	width:50%;
+	position: relative;
+	display:none;
+	
+}
+#account-type-list li{
+	list-style-type: none;
+	padding: 5px;
+	cursor:pointer;
+}
+#account-type-list li:hover{
+	border-bottom: 1px dotted var(--base-outline-color);
+}
+.email input,.account-type input,.languages input,.telephone input{
+	width:100%;
+}
+.occupation-description{
+	border:none!important;
+}
+.occupation-description textarea{
+	resize:none;
+	outline-style: solid;
+	outline-color: var(--base-outline-color);
+	outline-width: 0.5px;
+}
+.occupation-description textarea:focus{
+	outline-style: solid !important;
+	outline-color: var(--base-outline-color);
+	outline-width: 0.5px;
+}
+#submit-input{
+	color:var(--base-text-color-1);
+	background-color: var(--base-button-color)!important;
+	width:60%;
+	text-align:center;
+	height:30px;
+}
+#submit-input:hover{
+	cursor: pointer;
+	background: var(--base-bg-color-3)!important;
+	border:1px dotted var(--base-bg-color-1);
+}
+.new-language{
+	background-color: var(--base-bg-color-2);
+	padding:5px;
+	cursor: default;
+	margin-right: 5px;
+}
+.new-language span{
+	color: var(--base-text-color-1);
+	background-color: var(--base-bg-color-3);
+	padding: 3px;
+	margin-left:5px;
+	cursor: pointer;
 }
