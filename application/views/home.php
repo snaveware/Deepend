@@ -15,6 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div id="users" >
 			<!--<ul id="slidesContainer" class="list-f">
 			<ul>-->
+			<img style="height:100%;width:100%;object-fit:contain;" src="<?=base_url()?>assets/images/home.png" alt="">
 				
 		</div>
 	</div>

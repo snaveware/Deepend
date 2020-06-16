@@ -538,12 +538,12 @@ list-style-type: none;
 	display:block;
 }
 #users{
-	width: 800px;
+	width: 50%;
 	position: relative;
-	top: 20vh;
+	top: 5vh;
 	overflow: hidden;
 	background: transparent;
-	height: max-content;
+	height: 100%;
 }
 
 #user-count{
