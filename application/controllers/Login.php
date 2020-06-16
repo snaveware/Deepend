@@ -5,7 +5,8 @@ class Login extends CI_controller
 {
 	public function index()
 	{
-		$this->load->view('login');
+		$base_url = base_url();
+		header("location: $base_url");
 	}//end index function
 
 	public function validate()
@@ -31,18 +32,20 @@ class Login extends CI_controller
 			$password = $_POST['password'];
 			$email = $_POST['email'];
 			$data = $this->Select->get_content("id,password,first_name,last_name,account_type,
-			account_status,image,review",
+			account_status,image,review,user_description",
 			"users",true,"email = '$email'",);
 			if(count($data) < 1 )
 			{
-				$data['email_error'] = '<p>user does not exist please check email</p>';
-				$data['password_error'] = '';
-				echo json_encode($data);
+				$return['email_error'] = '<p>user does not exist please check email</p>';
+				$return['password_error'] = '';
+				echo json_encode($return);
 				exit();
 			}
 			elseif(count($data)==1)
 			{
-				if((int)$data[0]['password'] == (int)$password)
+				//(int)$data[0]['password'] == (int)$password
+				$password_verified =password_verify((int)$password,(string)$data[0]['password']);
+				if($password_verified==1)
 			{
 				if ($data[0]['account_status'] == 'active' );
 				{
@@ -55,6 +58,7 @@ class Login extends CI_controller
 						setcookie('account_type',$data[0]['account_type'],time()+86400*365,'/');
 						setcookie('image',$data[0]['image'],time()+86400*365,'/');
 						setcookie('review',$data[0]['review'],time()+86400*365,'/');
+						setcookie('description',$data[0]['user_description'],time()+86400*365,'/');
 						$return = ['success',$image];
 						echo json_encode($return);
 					}else
@@ -65,6 +69,7 @@ class Login extends CI_controller
 						$_SESSION['account_type'] = $data[0]['account_type'];
 						$_SESSION['image'] = $data[0]['image'];
 						$_SESSION['review'] = $data[0]['review'];
+						$_SESSION['description'] = $data[0]['user_description'];
 						$return = ['success',$image];
 						echo json_encode($return);
 					}
@@ -72,9 +77,11 @@ class Login extends CI_controller
 			}
 			else
 			{
-				$data['password_error'] = '<p>wrong password try again</p>';
-				$data['email_error'] = '';
-				echo json_encode($data);
+				$return['password_error'] = '<p>wrong password try again</p>';
+				$return['email_error'] = '';
+				$return['password'] =$password;
+				$return['is verified'] = $password_verified;
+				echo json_encode($return);
 				exit();
 			}
 			}

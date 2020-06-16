@@ -19,5 +19,12 @@ class Insert extends CI_Model
 			$this->db->query($sql,array($values));
 		}
 	}
+	public function add_user($values)
+	{
+		$columns = "first_name,last_name,password,email,account_type,created_on,telephone,location,languages,gender,user_description";
+		$sql = "INSERT INTO users ($columns)
+			VALUES ?,?,?,?,?,?,?,?,?,?,?";
+			$this->db->query($sql,$values);
+	}
 }//end class
 ?>

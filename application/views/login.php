@@ -35,6 +35,6 @@
 		<input type="submit"name="login"value="Login" class="full-btn">
 	</div>
 	<div class="form-redirects">
-		<small>Signup <a href="<?= base_url()?>/signup">here</a></small>
+		<small>Signup <a href="<?= base_url()?>/join">here</a></small>
 	</div>
 </form>

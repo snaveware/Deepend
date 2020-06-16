@@ -40,5 +40,5 @@ $logo=$data[0]['featured_files'];
 			<?php
 		}?>
 	</div>
-</div>   
+</div>
 <?php $this->load->view('login');?>                   

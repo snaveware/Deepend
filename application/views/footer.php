@@ -21,7 +21,6 @@
 					</a>
 				</p>
 			</div>
-			<script src="<?=base_url()?>assets/js/profile.js"></script>
 			<script src="<?=base_url()?>assets/js/login.js"></script>
 		</section>
 	</body>

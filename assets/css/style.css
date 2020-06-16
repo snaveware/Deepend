@@ -9,7 +9,7 @@ body{
 	font-family: 'Sen', sans-serif;
 	--base-bg-color-1:rgb(255,255,255);
 	--base-bg-color-2:rgb(242,242,242);
-	--base-bg-color-3:rgb(29,67,84);
+	--base-bg-color-3:#1d4354;
 	--base-text-color-1:rgb(255,255,228);
 	--base-text-color-2:rgb(34,60,60);
 	--base-link-color-1:rgb(11, 207, 11);
@@ -516,11 +516,11 @@ list-style-type: none;
 	position: relative;
 	top: 15px;
 }
-.error-1 p{
+.error-1 p,.error-3{
 	background-color:var(--base-error-color);
 	color: var(--base-text-color-1);
 	box-shadow: 2px 2px 6px var(--base-error-color);
-	padding: 5px;
+	width:max-content;
 }
 .error-2 p{
 	background-color: var(--base-bg-color-1);
@@ -712,6 +712,7 @@ list-style-type: none;
 	min-width:50%;
 	margin:0;
 	padding:0;
+	background-color: var(--base-bg-color-1);
 }
 #signup-image-container img{
 width: 100%;
@@ -737,7 +738,7 @@ object-fit: cover;
 	margin:5px auto;
 	border-bottom:0.5px solid var(--base-outline-color);
 }
-#account-type-list{
+#account-type-list,#gender-list{
 	background-color: var(--base-bg-color-1);
 	box-shadow: 1px 2px 6px var(--base-bg-color-3);
 	margin:10px auto;
@@ -747,15 +748,15 @@ object-fit: cover;
 	display:none;
 	
 }
-#account-type-list li{
+#account-type-list li,#gender-list li{
 	list-style-type: none;
 	padding: 5px;
 	cursor:pointer;
 }
-#account-type-list li:hover{
+#account-type-list li:hover,#gender-list li:hover{
 	border-bottom: 1px dotted var(--base-outline-color);
 }
-.email input,.account-type input,.languages input,.telephone input{
+.email input,.account-type input,.languages input,.telephone input,.gender input{
 	width:100%;
 }
 .occupation-description{
@@ -796,4 +797,10 @@ object-fit: cover;
 	padding: 3px;
 	margin-left:5px;
 	cursor: pointer;
+}
+.check{
+	font-size:3rem;
+	font-weight: bold;
+	text-align: center;
+	margin-left:5px;
 }
