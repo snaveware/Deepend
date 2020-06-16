@@ -14,7 +14,7 @@ body{
 	--base-text-color-2:rgb(34,60,60);
 	--base-link-color-1:rgb(11, 207, 11);
 	--base-link-color-2:rgb(55,160,0);
-	--base-button-color:rgb(55,160,0);
+	--base-button-color:#37a000;
 	--base-outline-color:rgba(-55,160,0,0.5);
 	--base-error-color: rgb(119, 22, 22);
 	background-color: var(--base-bg-color-2);
