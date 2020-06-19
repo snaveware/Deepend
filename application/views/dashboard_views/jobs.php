@@ -13,6 +13,7 @@ if(!count($jobs)<1)
         <td>Job Status</td>
         <td>Employer Name</td>
         <td>Earnings</td>
+        <td>View Job</td>
       </tr>
       <?php    
       for ($i=0; $i <count($jobs) ; $i++) 
@@ -25,8 +26,8 @@ if(!count($jobs)<1)
             ?>
             <td class="<?= $key?>"><?= $value?></td>
             <?php
-          }
-          ?>
+          }?>     
+            <td class="btn" onclick="view(event,'<?= $jobs[$i]['id']?>')">View</td>
         </tr>
         <?php
       }
@@ -37,43 +38,18 @@ if(!count($jobs)<1)
   elseif($account_type == 'buyer')
   {
     ?>
-    <script src="<?= base_url()?>assets/js/userJobs.js"></script>
-    <p>
+    <p style="border-bottom:0.5px solid var(--base-outline-color);padding:15px;">
       <a class="btn" style="text-decoration:none;margin:5px;" href="<?=base_url()?>dashboard/jobs">Jobs</a>
       <a class="btn"style="text-decoration:none;margin:5px;" href="<?=base_url()?>dashboard/jobs/new">New Job</a>
     </p>
-    <table id="user-jobs-table">
-      <tr class="table-title-row">
-        <td>Job Id</td>
-        <td>Job Title</td>
-        <td>Job Category</td>
-        <td>Job Status</td>
-        <td>Budget</td>
-        <td>Proposals</td>
-        <td>Edit</td>
-
-      </tr>
-      <?php
-      for ($i=0; $i <count($jobs) ; $i++) { 
-        ?>
-        <tr job-id = "<?= $jobs[$i]['id']?>" class="job-row">
-          <?php
-          foreach($jobs[$i] as $key => $value )
-          { 
-            ?>
-            <td class="<?= $key?>"><?= $value?></td>
-            <?php
-          }
-          ?>
-            <td class="btn" onclick="editUserJob(event,'<?= $jobs[$i]['id']?>')">Edit</td>
-            <?php
-          ?>
-        </tr>
-        <?php
-      }
-      ?>
-    </table>
     <?php
+    switch ($view) {
+      case 'jobs':
+        $this->load->view('dashboard_views/user_jobs_views/jobs',$jobs);
+        break;
+      default:
+        $this->load->view("dashboard_views/user_jobs_views/$view");
+    }
   }
 }
 else
@@ -83,3 +59,4 @@ else
 }
 //print_r($jobs);
 ?>
+<script src="<?= base_url()?>assets/js/userJobs.js"></script>

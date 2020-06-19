@@ -4,12 +4,12 @@ let postPerPage = 2;
 let page = 1;
 let category = "*";
 const resultsCount = document.getElementById('results'); 
-const baseUrl = 'localhost/deepend/';
+const baseUrl = document.getElementById('base-url').innerHTML;
 
 function getPassedTime(yourTime,inSeconds=false)
 {
 	let currentTime= (new Date()- new Date(0))/1000;
-	let time =(currentTime - yourTime);
+	let time =parseInt(currentTime - yourTime);
 	if(inSeconds)
 	{
 		return time;
@@ -37,10 +37,10 @@ function getPassedTime(yourTime,inSeconds=false)
 		posted = passedTime >1 ? passedTime+"days ago" : " Yesterday";
 	}
 
-	else if(time>= 86400 && time < 604800)
+	else if(time>= 86400)
 	{
 		passedTime =parseInt(time/604800);
-		posted = $passedTime >1 ? passedTime+"weeks ago" : $passed_time+" week ago";
+		posted = passedTime >1 ? passedTime+" weeks ago" : passed_time+" week ago";
 	}
 	else{
 		posted = "-";
@@ -120,24 +120,28 @@ function showPage(event)
 	document.getElementById('pagination').innerHTML = "";
 	createPosts(page,postPerPage,category);
 }
-
+function showJob(event,id)
+{
+	location.replace(`${baseUrl}jobs/${id}`)
+}
 function createPosts(thePage,theQuantity,theCategory,theKeywordsRegex = undefined)
 {
 	xhr = new XMLHttpRequest;
 	if(theKeywordsRegex)
 	{
-		xhr.open('get',`jobs/get_posts?page=${thePage}&quantity=${theQuantity}&
+		xhr.open('get',`${baseUrl}jobs/get_posts?page=${thePage}&quantity=${theQuantity}&
 		category=${theCategory}&keywords=${theKeywordsRegex}`,true)
 	}
 	else
 	{
-		xhr.open('get',`jobs/get_posts?page=${thePage}&quantity=${theQuantity}&category=${theCategory}`,true)
+		xhr.open('get',`${baseUrl}jobs/get_posts?page=${thePage}&quantity=${theQuantity}&category=${theCategory}`,true)
 	}
 	xhr.onreadystatechange= function() 
 	{
 		if(this.readyState == 4 && this.status ==200)
 		{
 			let posts = JSON.parse(this.responseText);
+			console.log(posts)
 			const count = posts.length
 			const totalResults = posts[count-1];
 			for(let i=0; i<count-1; i++)
@@ -147,8 +151,6 @@ function createPosts(thePage,theQuantity,theCategory,theKeywordsRegex = undefine
 				let descriptionText = showWords(description,descriptionLength)
 				let skillsArray = posts[i].skills.split('|');
 				let theSkills = showSkills(skillsArray)
-				let remainingTime =( posts[i].uptime- getPassedTime(posts[i].created_on,true))/3600
-				let expiry =parseInt(remainingTime)+" hours remaining";
 				let rating = showRating(posts[i].review);
 	
 				document.getElementById('loader').style.display ="none";
@@ -158,6 +160,9 @@ function createPosts(thePage,theQuantity,theCategory,theKeywordsRegex = undefine
 	
 				let title = document.createElement('h2');
 				title.classList.add('just-heading-1');
+				title.setAttribute('onclick',`showJob(event,'${posts[i].id}')`)
+				title.style.cursor="pointer"
+				title.title="view job"
 				title.innerHTML = posts[i].title;
 	
 				post.appendChild(title);
@@ -182,7 +187,15 @@ function createPosts(thePage,theQuantity,theCategory,theKeywordsRegex = undefine
 				let postTitleUlLi3= document.createElement('li');
 				postTitleUl.appendChild(postTitleUlLi3);
 				postTitleUlLi3.innerHTML ='posted  '+time;	
-	
+				
+				sendProposalBtn = document.createElement('a')
+				sendProposalBtn.setAttribute('href',`${baseUrl}jobs/send_proposal?id=${posts[i].id}`)
+				sendProposalBtn.setAttribute('class','btn')
+				sendProposalBtn.style.textDecoration="none"
+				sendProposalBtn.style.left="50px"
+				sendProposalBtn.innerHTML="Send Proposal"
+				post.appendChild(sendProposalBtn)
+
 				let descriptionNode = document.createElement('article');
 				descriptionNode.classList.add('job-description');
 	
@@ -213,13 +226,7 @@ function createPosts(thePage,theQuantity,theCategory,theKeywordsRegex = undefine
 				let skillsP = document.createElement('p');
 				skillsP.classList.add('flexbox-row-left');
 				skillsP.innerHTML = theSkills;
-				postFooter.appendChild(skillsP);
-	
-				postMetaP =document.createElement('p');
-				postMetaP.classList.add('just-text-2');
-				postMetaP.innerHTML =` ${posts[i].bids} of ${posts[i].maximum_bids} proposals sent | ${expiry}`; 
-				postFooter.appendChild(postMetaP);
-	
+				postFooter.appendChild(skillsP)
 				let postFooterUl =document.createElement('ul');
 				postFooterUl.classList.add('flexbox-row-left');
 				postFooterUl.classList.add('list-c');
@@ -228,7 +235,7 @@ function createPosts(thePage,theQuantity,theCategory,theKeywordsRegex = undefine
 				let postFooterUlLi1= document.createElement('li');
 				postFooterUlLi1.innerHTML =`<img height = "50px" width="50px"
 				style="border-radius:50%;object-fit:cover;"
-				src="assets/images/${posts[i].image}">`
+				src="${baseUrl}assets/images/${posts[i].image}">`
 	
 				//postFooterUlLi1.appendChild(userProfileImg);
 				postFooterUl.appendChild(postFooterUlLi1);

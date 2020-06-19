@@ -5,7 +5,8 @@ class Jobs extends CI_Controller
 {
 	public function index()
 	{
-		$this->load->view('jobs');
+		$data['view'] = 'many_posts';
+		$this->load->view('jobs',$data);
 	}
 	
 	public function get_posts()
@@ -19,33 +20,27 @@ class Jobs extends CI_Controller
 			$the_keywords =  isset($_GET['keywords'])?"(.*)". $_GET['keywords'].".*": null  ;
 			if($the_category =="*")
 			{
-				$time = time();
 				if($the_keywords)
 				{
-					$the_where_columns = "jobs.job_status = 'bidding' and jobs.bids < jobs.maximum_bids 
-					and jobs.uptime+jobs.created_on >$time and 
+					$the_where_columns = "jobs.job_status = 'bidding' and
 					(jobs.description REGEXP '$the_keywords'or jobs.skills REGEXP '$the_keywords' or
 					 jobs.title REGEXP '$the_keywords' or jobs.category REGEXP '$the_keywords' )";
 				}
 				else
 				{
-					$the_where_columns = "jobs.job_status = 'bidding' and jobs.bids < jobs.maximum_bids 
-					and jobs.uptime+jobs.created_on >$time ";
+					$the_where_columns = "jobs.job_status = 'bidding' ";
 				}
 				
 			}
 			else{
-				$time = time();
 				if($the_keywords)
 				{
-					$the_where_columns = "jobs.job_status = 'bidding' and jobs.bids < jobs.maximum_bids 
-					and jobs.uptime+jobs.created_on >$time and jobs.category = '$the_category'
+					$the_where_columns = "jobs.job_status = 'bidding'and jobs.category = '$the_category'
 					and jobs.description REGEXP '$the_keywords'";
 				}
 				else
 				{
-					$the_where_columns = "jobs.job_status = 'bidding' and jobs.bids < jobs.maximum_bids 
-				and jobs.uptime+jobs.created_on >$time and jobs.category = '$the_category'";
+					$the_where_columns = "jobs.job_status = 'bidding' and jobs.category = '$the_category'";
 				}
 			}
 			if($the_page == 1)
@@ -58,8 +53,8 @@ class Jobs extends CI_Controller
 				$the_limit = "$seen_posts,$the_quantity";
 			}
 
-			$columns = "jobs.id,jobs.title,jobs.category,jobs.description,jobs.skills,jobs.maximum_bids,
-			jobs.created_on,jobs.uptime,jobs.budget,jobs.bids,users.first_name,users.last_name
+			$columns = "jobs.id,jobs.title,jobs.category,jobs.description,jobs.skills,
+			jobs.created_on,jobs.budget,jobs.bids,users.first_name,users.last_name
 			,users.review,users.location,users.image";
 
 			$tables = array('jobs','users');
@@ -82,7 +77,34 @@ class Jobs extends CI_Controller
 			echo"page not found";
 		}
 	}//end function
+ public function single($id)
+ {
+	$columns = "jobs.id,jobs.title,jobs.category,jobs.description,jobs.skills,
+	jobs.created_on,jobs.budget,jobs.bids,users.first_name,users.last_name
+	,users.review,users.location,users.image";
+	$tables = array('jobs','users');
+	$join_columns = array('jobs.buyer_user_id = users.id');
+	$order_by = 'order by jobs.created_on DESC';
+	$limit = "limit 1";
+	$where_columns = array("jobs.job_status = 'bidding' and  jobs.id = $id");
+	$data['job'] = $this->Select->get_joined_data($columns,$tables,$join_columns,$order_by,$limit,
+	true,$where_columns);
 
+	 $data['view'] = "single_post";
+	 $this->load->view('jobs',$data);
+ }
+ public function send_proposal()
+ {
+	 if(isset($_GET['id']))
+	 {
+		$data['view'] = "send_proposal";
+		$this->load->view('jobs',$data);
+	 }
+	 else
+	 {
+		 echo"no id";
+	 }
+ }
 }//end class
 
 ?>

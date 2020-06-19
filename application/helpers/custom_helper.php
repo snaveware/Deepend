@@ -56,7 +56,7 @@ function passed_time($your_time)
 		$posted = $passed_time >1 ? $passed_time."days ago" : " Yesterday";
 	}
 
-	elseif($time>= 86400 && $time < 604800)
+	elseif($time>= 86400)
 	{
 		$passed_time =(int)($time/604800);
 		$posted = $passed_time >1 ? $passed_time."weeks ago" : $passed_time." week ago";

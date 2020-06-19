@@ -358,7 +358,7 @@ list-style-type: none;
 	width: 32px;
 	height: 32px;
 }
-#job-posts{
+#job-posts,#single-post{
 	width: 70vw;
 	height: 100%;
 	background: transparent;
@@ -719,26 +719,32 @@ width: 100%;
 height:100%;
 object-fit: cover;
 }
-#signup-form{
+#signup-form,#new-job-form{
 	padding-left:3vw;
 	padding-bottom:2vh;
 	background-color:var(--base-bg-color-1);
 	color:var(--base-link-color-2);
 }
-#signup-form input,#signup-form textarea{
+#signup-form input,#signup-form textarea,#new-job-form input,#new-job-form textarea{
 	background: transparent;
 	border:none;
 }
-#signup-form input:focus,#signup-form textarea:focus{
+#signup-form input:focus,
+#signup-form textarea:focus,
+#new-job-form input:focus, 
+#new-job-form textarea:focus{
 	outline-style: none;
 }
-#signup-form div{
+#signup-form div,#new-job-form div{
 	width:60%;
 	padding:5px;
 	margin:5px auto;
 	border-bottom:0.5px solid var(--base-outline-color);
 }
-#account-type-list,#gender-list{
+#new-job-form input{
+	width:100%;
+}
+#account-type-list,#gender-list,#category-list,#skills-list{
 	background-color: var(--base-bg-color-1);
 	box-shadow: 1px 2px 6px var(--base-bg-color-3);
 	margin:10px auto;
@@ -746,52 +752,66 @@ object-fit: cover;
 	width:50%;
 	position: relative;
 	display:none;
+	max-height: 200px;
+	overflow-y: scroll;
 	
 }
-#account-type-list li,#gender-list li{
+#account-type-list li,#gender-list li,
+#skills-list li,#category-list li{
 	list-style-type: none;
 	padding: 5px;
 	cursor:pointer;
 }
-#account-type-list li:hover,#gender-list li:hover{
+#account-type-list li:hover,#gender-list li:hover,
+#skills-list li:hover,#category-list li:hover{
 	border-bottom: 1px dotted var(--base-outline-color);
 }
-.email input,.account-type input,.languages input,.telephone input,.gender input{
+.email input,
+.account-type input,
+.languages input,
+.telephone input,
+.gender input{
 	width:100%;
 }
-.occupation-description{
+.occupation-description,.job-description{
 	border:none!important;
 }
-.occupation-description textarea{
+.occupation-description textarea,
+.job-description textarea{
 	resize:none;
 	outline-style: solid;
 	outline-color: var(--base-outline-color);
 	outline-width: 0.5px;
 }
-.occupation-description textarea:focus{
+.job-description textarea{
+	width:100%;
+	resize: vertical !important;
+}
+.occupation-description textarea:focus,
+.job-description textarea:focus{
 	outline-style: solid !important;
 	outline-color: var(--base-outline-color);
 	outline-width: 0.5px;
 }
-#submit-input{
+#submit-input,#job-submit-input{
 	color:var(--base-text-color-1);
 	background-color: var(--base-button-color)!important;
 	width:60%;
 	text-align:center;
 	height:30px;
 }
-#submit-input:hover{
+#submit-input:hover,#job-submit-input:hover{
 	cursor: pointer;
 	background: var(--base-bg-color-3)!important;
 	border:1px dotted var(--base-bg-color-1);
 }
-.new-language{
+.new-language,.new-skill{
 	background-color: var(--base-bg-color-2);
 	padding:5px;
 	cursor: default;
 	margin-right: 5px;
 }
-.new-language span{
+.new-language span,.new-skill span{
 	color: var(--base-text-color-1);
 	background-color: var(--base-bg-color-3);
 	padding: 3px;

@@ -77,6 +77,11 @@ class Join extends CI_controller
     }
     else
     {
+      if(get_details('id'))
+      {
+        $home = base_url();
+        header("location: $home");
+      }
       $this->load->view('join');
     }
   }
