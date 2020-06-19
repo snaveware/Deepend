@@ -40,7 +40,7 @@ function getPassedTime(yourTime,inSeconds=false)
 	else if(time>= 86400)
 	{
 		passedTime =parseInt(time/604800);
-		posted = passedTime >1 ? passedTime+" weeks ago" : passed_time+" week ago";
+		posted = passedTime >1 ? passedTime+" weeks ago" : passedTime+" week ago";
 	}
 	else{
 		posted = "-";
