@@ -57,7 +57,6 @@ loginForm.addEventListener('submit',e=>{
 			else
 			{
 				errorsField.innerHTML = response.email_error + response.password_error;
-				console.log(response);
 			}
 		
 		}
