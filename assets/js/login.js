@@ -29,7 +29,6 @@ loginForm.addEventListener('submit',e=>{
 	let email =emailField.value;
 	let password = passwordField.value;
 	let keepValue = keep.checked? 'checked':'not checked';
-	console.log(keepValue);
 	xhr = new XMLHttpRequest();
 	xhr.open('POST',`${homeUrl}login/validate`,true);
 	xhr.onreadystatechange = function() 

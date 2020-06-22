@@ -1,6 +1,6 @@
 const singlePost = document.getElementById('posts');
 const descriptionLength = 50;
-let postPerPage = 2;
+let postPerPage = 5;
 let page = 1;
 let category = "*";
 const resultsCount = document.getElementById('results'); 
