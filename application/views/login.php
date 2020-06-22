@@ -32,7 +32,7 @@
 				<td><small>keep me logged in</small></td>
 			</tr>
 		</table>
-		<input type="submit"name="login"value="Login" class="full-btn">
+		<input type="submit"name="login"value="Login" id="login-submit" class="full-btn">
 	</div>
 	<div class="form-redirects">
 		<small>Signup <a href="<?= base_url()?>/join">here</a></small>

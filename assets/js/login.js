@@ -7,6 +7,7 @@ const keep = document.getElementById('keep');
 const errorsField = document.getElementById('login-errors');
 const accountBtns = document.getElementById('account-buttons'); 
 const accountsPosition = document.getElementById('nav-account');
+const loginSubmitBtn = document.getElementById('login-submit');
 const homeUrl = document.getElementById('base-url').innerHTML;
 let image;
 loginBtn.addEventListener('click',e=>{
@@ -26,9 +27,9 @@ closeBtn.addEventListener('click',e=>{
 
 loginForm.addEventListener('submit',e=>{
 	e.preventDefault();
-	loginBtn.disabled = true;
-	loginBtn.style.opacity = "70%";
-	loginBtn.style.cursor = 'progress';
+	loginSubmitBtn.disabled = true;
+	loginSubmitBtn.style.opacity = "70%";
+	loginSubmitBtn.style.cursor = 'progress';
 	let email =emailField.value;
 	let password = passwordField.value;
 	let keepValue = keep.checked? 'checked':'not checked';
@@ -41,9 +42,9 @@ loginForm.addEventListener('submit',e=>{
 			let response = JSON.parse(this.responseText);
 			if(response[0] == 'success')
 			{
-				loginBtn.disabled = false;
-				loginBtn.style.opacity = "100%";
-				loginBtn.style.cursor = 'pointer';
+				loginSubmitBtn.disabled = false;
+				loginSubmitBtn.style.opacity = "100%";
+				loginSubmitBtn.style.cursor = 'pointer';
 				closeBtn.click();
 				accountsPosition.innerHTML= `
 				<div style="width:100px;height:70px;" id="account">
@@ -61,9 +62,9 @@ loginForm.addEventListener('submit',e=>{
 			}
 			else
 			{
-				loginBtn.disabled = false;
-				loginBtn.style.opacity = "100%";
-				loginBtn.style.cursor = 'pointer';
+				loginSubmitBtn.disabled = false;
+				loginSubmitBtn.style.opacity = "100%";
+				loginSubmitBtn.style.cursor = 'pointer';
 				errorsField.innerHTML = response.email_error + response.password_error;
 			}
 		
