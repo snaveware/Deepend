@@ -26,6 +26,9 @@ closeBtn.addEventListener('click',e=>{
 
 loginForm.addEventListener('submit',e=>{
 	e.preventDefault();
+	loginBtn.disabled = true;
+	loginBtn.style.opacity = "70%";
+	loginBtn.style.cursor = 'progress';
 	let email =emailField.value;
 	let password = passwordField.value;
 	let keepValue = keep.checked? 'checked':'not checked';
@@ -38,6 +41,9 @@ loginForm.addEventListener('submit',e=>{
 			let response = JSON.parse(this.responseText);
 			if(response[0] == 'success')
 			{
+				loginBtn.disabled = false;
+				loginBtn.style.opacity = "100%";
+				loginBtn.style.cursor = 'pointer';
 				closeBtn.click();
 				accountsPosition.innerHTML= `
 				<div style="width:100px;height:70px;" id="account">
@@ -55,6 +61,9 @@ loginForm.addEventListener('submit',e=>{
 			}
 			else
 			{
+				loginBtn.disabled = false;
+				loginBtn.style.opacity = "100%";
+				loginBtn.style.cursor = 'pointer';
 				errorsField.innerHTML = response.email_error + response.password_error;
 			}
 		
