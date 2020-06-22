@@ -17,7 +17,7 @@ class Jobs extends CI_Controller
       {
         $rows = 'id,title,category,job_status,budget,bids';
         $data['jobs'] = $this->Select->get_content($rows,$table="jobs",
-        $where_condition=true,$where_part ="id=$id",
+        $where_condition=true,$where_part ="buyer_user_id=$id",
         $order_by ='id DESC',$limit= 10000);
       }
       elseif($account_type == 'seller')
@@ -54,12 +54,33 @@ class Jobs extends CI_Controller
       header("location: $dashboard");
     }
   }
-  public function job($id)
+  public function job($job_id)
   {
     $id =get_details('id');
 		$account_type =strtolower(get_details('account_type'));
     if($id && $account_type == "buyer")
 		{
+      $rows = 'id,title,category,description,job_status,budget,created_on,skills';
+      $data['jobs']['job'] = $this->Select->get_content($rows,$table="jobs",
+      $where_condition=true,$where_part ="id = $job_id",
+      $order_by ='id DESC',$limit= 10000);
+
+      $columns = "bids.cover_letter,bids.bid_status,bids.bid_amount,users.first_name,users.last_name";
+      $tables = array('bids','users');
+     
+      $joining_columns = array('bids.seller_user_id = users.id');
+      $where_columns = array("bids.job_id = '$job_id'");
+      
+      $order_by = 'order by bids.id DESC';
+      $limit = "limit 1000";
+
+      $data['jobs']['proposals']= $this->Select->get_joined_data($columns,$tables,$joining_columns,$order_by,$limit,
+			true,$where_columns);
+      
+
+      $data['view'] = 'jobs';
+      $data['jobs']['view'] = "single_job";
+      $this->load->view('dashboard',$data);
     }
     else
     {
@@ -147,7 +168,17 @@ class Jobs extends CI_Controller
         $time = time();
         $values = [$id,$_POST['title'],$_POST['category'],$_POST['description'],$_POST['skills'],$time,$_POST['budget']];
         $this->Insert->add_job($values);
-        $return= [true,'job added'];
+
+        $title = $_POST['title'];
+        $budget = $_POST['budget'];
+        
+        $new_job =$this->Select->get_content($rows="id",$table="jobs",
+        $where_condition=true,$where_part ="buyer_user_id = '$id' and title='$title' and budget = '$budget'",
+        $order_by ='id DESC',$limit= 1);
+
+        $job_id = $new_job[0]['id'];
+
+        $return= [true,$job_id];
         echo json_encode($return);
       }
       else
@@ -155,6 +186,19 @@ class Jobs extends CI_Controller
         $userNewJob = base_url()."dashboard/jobs/new";
         header("location: $userNewJob");
       }
+    }
+    else
+    {
+      $dashboard = base_url()."dashboard";
+      header("location: $dashboard");
+    }
+  }
+  public function hire()
+  {
+    $id =get_details('id');
+		$account_type =strtolower(get_details('account_type'));
+    if($id && $account_type == "buyer")
+		{
     }
     else
     {

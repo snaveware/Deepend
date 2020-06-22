@@ -57,4 +57,5 @@
       <small id="job-description-length" style="font-size:10px;"class="just-text-1;opacity:0.8;"></small>
   </div>
   <center><input type="submit" value="Join"id="job-submit-input"></center>
+  <center><p id="job-success"></p></center>
 </form>

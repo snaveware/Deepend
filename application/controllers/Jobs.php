@@ -93,17 +93,51 @@ class Jobs extends CI_Controller
 	 $data['view'] = "single_post";
 	 $this->load->view('jobs',$data);
  }
- public function send_proposal()
+ public function new_proposal()
  {
-	 if(isset($_GET['id']))
+	 $seller_id = get_details('id');
+	 if($seller_id)
 	 {
-		$data['view'] = "send_proposal";
-		$this->load->view('jobs',$data);
+		 if(isset($_GET['id']))
+		 {
+
+			$job_id = $_GET['id'];
+			$data['proposal']['status']=[true,'everything is verified'];
+			$data['view'] = "new_proposal";
+			$data['proposal']['seller_id'] =$seller_id;
+			$data['proposal']['job_id'] = $job_id;
+
+			$this->load->view('jobs',$data);
+		 }
+		 else
+			{
+			$data['proposal']['status']=[false,'job'];
+			$data['view'] = "new_proposal";
+			$this->load->view('jobs',$data);
+			}	
 	 }
 	 else
 	 {
-		 echo"no id";
+		$data['proposal']['status']=[false,'login'];
+		$data['view'] = "new_proposal";
+		$this->load->view('jobs',$data);
 	 }
+ }
+ public function send_proposal()
+ {
+	$columns = "job_id,seller_user_id,cover_letter,bid_amount";
+	$job_id = $_POST['job_id'];
+	$seller_id =get_details('id');
+	$cover_letter = $_POST['cover_letter'];
+	$amount = $_POST['amount'];
+
+	$values = [$job_id,$seller_id,$cover_letter,$amount];
+	$this->Insert->add_proposal($values);
+	$newProposal =$this->Select->get_content($rows="id",$table="bids",
+	$where_condition=true,$where_part ="job_id = '$job_id' and seller_user_id= '$seller_id' and bid_amount = '$amount'",
+	$order_by ='id DESC',$limit= 1);
+	$proposalId = $newProposal[0]['id'];
+	echo json_encode([true,$proposalId]);
  }
 }//end class
 

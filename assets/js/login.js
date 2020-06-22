@@ -7,6 +7,7 @@ const keep = document.getElementById('keep');
 const errorsField = document.getElementById('login-errors');
 const accountBtns = document.getElementById('account-buttons'); 
 const accountsPosition = document.getElementById('nav-account');
+const homeUrl = document.getElementById('base-url').innerHTML;
 let image;
 loginBtn.addEventListener('click',e=>{
 	if(loginForm.style.display='none')
@@ -30,7 +31,7 @@ loginForm.addEventListener('submit',e=>{
 	let keepValue = keep.checked? 'checked':'not checked';
 	console.log(keepValue);
 	xhr = new XMLHttpRequest();
-	xhr.open('POST','login/validate',true);
+	xhr.open('POST',`${homeUrl}login/validate`,true);
 	xhr.onreadystatechange = function() 
 	{
 		if(this.readyState == 4 && this.status == 200)
@@ -42,7 +43,7 @@ loginForm.addEventListener('submit',e=>{
 				accountsPosition.innerHTML= `
 				<div style="width:100px;height:70px;" id="account">
 					<div style="background-color:white;border-radius:25% 2px 2px 25%">
-						<img class="avatar" src="assets/images/${response[1]}" alt="profile">
+						<img class="avatar" src="${homeUrl}assets/images/${response[1]}" alt="profile">
 						<span class="caret"></span>
 					</div>
 					<ul class = "list-e" id="list-e">

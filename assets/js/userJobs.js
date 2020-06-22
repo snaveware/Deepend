@@ -19,7 +19,7 @@ let skills = []
 
 function view(event,jobId)
 {
-  location.replace(`${baseUri}dashboard/jobs/${jobId}`)
+  location.replace(`${baseUri}dashboard/job/${jobId}`)
 }
 function chooseSkill(item)
 {
@@ -148,6 +148,8 @@ form.addEventListener('submit',e=>{
     if(this.status ==200 && this.readyState == 4)
     {
       let response = JSON.parse(this.responseText)
+      success = document.getElementById('job-success')
+      success.innerHTML = `Your job was successfully added <a class="btn" href="${baseUri}jobs/${parseInt(response[1])}">View</a>`
       console.log(response)
     }
   }

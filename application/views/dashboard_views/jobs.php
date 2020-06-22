@@ -1,5 +1,5 @@
 <?php
-$account_type = get_details('account_type');
+$account_type =strtolower(get_details('account_type'));
 if(!count($jobs)<1)
 {
   if($account_type =='seller')
@@ -13,7 +13,6 @@ if(!count($jobs)<1)
         <td>Job Status</td>
         <td>Employer Name</td>
         <td>Earnings</td>
-        <td>View Job</td>
       </tr>
       <?php    
       for ($i=0; $i <count($jobs) ; $i++) 
@@ -27,7 +26,6 @@ if(!count($jobs)<1)
             <td class="<?= $key?>"><?= $value?></td>
             <?php
           }?>     
-            <td class="btn" onclick="view(event,'<?= $jobs[$i]['id']?>')">View</td>
         </tr>
         <?php
       }
@@ -46,6 +44,9 @@ if(!count($jobs)<1)
     switch ($view) {
       case 'jobs':
         $this->load->view('dashboard_views/user_jobs_views/jobs',$jobs);
+        break;
+      case 'single_job':
+        $this->load->view('dashboard_views/user_jobs_views/single_job',$jobs);
         break;
       default:
         $this->load->view("dashboard_views/user_jobs_views/$view");

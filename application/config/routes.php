@@ -50,8 +50,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['jobs/get_posts'] = "jobs/get_posts";
+$route['jobs/new_proposal'] = "jobs/new_proposal";
 $route['jobs/send_proposal'] = "jobs/send_proposal";
 $route['default_controller'] = 'Home';
+$route['dashboard/job/(:any)'] = "dashboard/jobs/job/$1";
 $route['dashboard/profile/get_profile'] = '/profile/get_profile';
 $route['dashboard/assets/(:any)/(:any)/(:any)'] = '/assets/$1/$2/$3';
 //$route['dashboard/(:any)']= 'dashboard/index/$1';

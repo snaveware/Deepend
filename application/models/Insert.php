@@ -33,5 +33,12 @@ class Insert extends CI_Model
 			VALUES (?,?,?,?,?,?,?)";
 			$this->db->query($sql,$values);
 	}
+	public function add_proposal($values)
+	{
+		$columns = "job_id,seller_user_id,cover_letter,bid_amount";
+		$sql = "INSERT INTO bids ($columns)
+			VALUES (?,?,?,?)";
+			$this->db->query($sql,$values);
+	}
 }//end class
 ?>

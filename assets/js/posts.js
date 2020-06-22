@@ -189,7 +189,7 @@ function createPosts(thePage,theQuantity,theCategory,theKeywordsRegex = undefine
 				postTitleUlLi3.innerHTML ='posted  '+time;	
 				
 				sendProposalBtn = document.createElement('a')
-				sendProposalBtn.setAttribute('href',`${baseUrl}jobs/send_proposal?id=${posts[i].id}`)
+				sendProposalBtn.setAttribute('href',`${baseUrl}jobs/new_proposal?id=${posts[i].id}`)
 				sendProposalBtn.setAttribute('class','btn')
 				sendProposalBtn.style.textDecoration="none"
 				sendProposalBtn.style.left="50px"

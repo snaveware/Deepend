@@ -719,29 +719,32 @@ width: 100%;
 height:100%;
 object-fit: cover;
 }
-#signup-form,#new-job-form{
+#signup-form,#new-job-form,#proposal-form{
 	padding-left:3vw;
 	padding-bottom:2vh;
 	background-color:var(--base-bg-color-1);
 	color:var(--base-link-color-2);
 }
-#signup-form input,#signup-form textarea,#new-job-form input,#new-job-form textarea{
+#signup-form input,#signup-form textarea,#new-job-form input,#new-job-form textarea,
+#proposal-form input,#proposal-form textarea{
 	background: transparent;
 	border:none;
 }
 #signup-form input:focus,
 #signup-form textarea:focus,
 #new-job-form input:focus, 
-#new-job-form textarea:focus{
+#new-job-form textarea:focus,
+#proposal-form input:focus,
+#proposal-form textarea:focus{
 	outline-style: none;
 }
-#signup-form div,#new-job-form div{
+#signup-form div,#new-job-form div,#proposal-form div{
 	width:60%;
 	padding:5px;
 	margin:5px auto;
 	border-bottom:0.5px solid var(--base-outline-color);
 }
-#new-job-form input{
+#new-job-form input,#proposal-form input{
 	width:100%;
 }
 #account-type-list,#gender-list,#category-list,#skills-list{
@@ -773,34 +776,35 @@ object-fit: cover;
 .gender input{
 	width:100%;
 }
-.occupation-description,.job-description{
+.occupation-description,.job-description,.cover-letter{
 	border:none!important;
 }
 .occupation-description textarea,
-.job-description textarea{
+.job-description textarea,.cover-letter textarea{
 	resize:none;
 	outline-style: solid;
 	outline-color: var(--base-outline-color);
 	outline-width: 0.5px;
 }
-.job-description textarea{
+.job-description textarea,.cover-letter textarea{
 	width:100%;
 	resize: vertical !important;
 }
 .occupation-description textarea:focus,
-.job-description textarea:focus{
+.job-description textarea:focus,
+.cover-letter textarea:focus{
 	outline-style: solid !important;
 	outline-color: var(--base-outline-color);
 	outline-width: 0.5px;
 }
-#submit-input,#job-submit-input{
+#submit-input,#job-submit-input,#proposal-submit-input{
 	color:var(--base-text-color-1);
 	background-color: var(--base-button-color)!important;
 	width:60%;
 	text-align:center;
 	height:30px;
 }
-#submit-input:hover,#job-submit-input:hover{
+#submit-input:hover,#job-submit-input:hover,#proposal-submit-input:hover{
 	cursor: pointer;
 	background: var(--base-bg-color-3)!important;
 	border:1px dotted var(--base-bg-color-1);
@@ -824,3 +828,10 @@ object-fit: cover;
 	text-align: center;
 	margin-left:5px;
 }
+#proposal-form{
+	position:relative;
+	width:80vw;
+	height: max-content;
+	margin: 10px auto;
+}
+

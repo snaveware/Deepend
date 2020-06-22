@@ -14,17 +14,23 @@ alt="profile picture">
 <h3 class="heading-2 center"><?=$description?></h3>
 <h3 class="heading-2"><?= $rating?></h3>
 <ul class="list-d-a ">
-<li>
-<a href="<?=base_url()?>dashboard/jobs">Jobs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-</li>
-<li>
-<a href="<?=base_url()?>dashboard/settings">Settings</a>
-</li>
+  <li>
+    <a href="<?=base_url()?>dashboard">Profiles</a>
+  </li>
+  <li>
+    <a href="<?=base_url()?>dashboard/jobs">Jobs</a>
+  </li>
+  <li>
+    <a href="<?=base_url()?>dashboard/settings">Settings</a>
+  </li>
+  <li>
+    <a href="<?=base_url()?>dashboard/proposals">Proposals</a>
+  </li>
 <?php
   if($account_type == "seller")
   {?>
   <li>
-    <a href="<?=base_url()?>dashboard/gigs">Gigs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+    <a href="<?=base_url()?>dashboard/gigs">Gigs</a>
   </li>
   <?php
   }

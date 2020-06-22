@@ -20,7 +20,7 @@
             <?php
           }
           ?>
-            <td class="btn" onclick="view(event,'<?= $jobs[$i]['id']?>')">View</td>
+            <td class="btn"style="cursor:pointer;" onclick="view(event,'<?= $jobs[$i]['id']?>')">View</td>
             <?php
           ?>
         </tr>
