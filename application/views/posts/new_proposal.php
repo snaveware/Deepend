@@ -1,5 +1,5 @@
 <?php //print_r($proposal['status']);?>  
-<form id="proposal-form" job-id="<?php isset($proposal['job_id'])? $proposal['job_id']:''?>">
+<form id="proposal-form">
 <div class="amount">
   <p>
       <span>Amount</span>

@@ -254,7 +254,7 @@ list-style-type: none;
 	border-right: 0.5px dotted var(--base-outline-color);
 	border-bottom: 0.5px dotted var(--base-outline-color);
 }
-.btn{
+.btn,.btn-3{
 	background-color: var(--base-button-color);
 	color: var(--base-text-color-1);
 	border: none;
@@ -263,6 +263,9 @@ list-style-type: none;
 	position: relative;
 	margin-left: -50px;
 	text-align:center;
+}
+.btn-3{
+	margin-left:10px !important;
 }
 .btn-border{
 	border:1px solid var(--base-button-color);

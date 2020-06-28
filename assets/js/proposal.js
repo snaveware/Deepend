@@ -13,11 +13,7 @@ function showError(error)
   }
   else
   {
-    alert("Please Login or Create an account first")
-    submitBtn.disabled=true
-    submitBtn.style.opacity="50%"
-    submitBtn.title="please login and reload the page"
-    
+    alert("Please Login or Create an account first")  
   }
   
 }
@@ -30,7 +26,11 @@ coverLetterTextarea.addEventListener('keyup',()=>{
 proposalForm.addEventListener('submit',e=>{
   e.preventDefault()
   submitBtn.disabled=true
-  let jobId =proposalForm.getAttribute('job-id')
+  submitBtn.style.cursor="none"
+  submitBtn.style.opacity="0.3"
+  let searchArray =window.location.search.trim().split('=')
+  let jobId =searchArray.pop()
+  console.log(jobId);
   let amount = amountInput.value
   let coverLetter = coverLetterTextarea.value
   let params = `job_id=${jobId}&amount=${amount}&cover_letter=${coverLetter}` 
@@ -43,7 +43,17 @@ proposalForm.addEventListener('submit',e=>{
       if(response[0])
       {
         let successElement =document.getElementById('success')
-        successElement.innerHTML=`Your Proposal has been sent<a class="btn" href="${baseUrl}dashboard/proposals">View</a>`
+        successElement.innerHTML=`Your Proposal has been sent<a class="btn-3" href="${baseUrl}dashboard/proposals">View</a>`
+        submitBtn.disabled=false
+        submitBtn.style.cursor="pointer"
+        submitBtn.style.opacity="1"
+      }
+      else
+      {
+        alert(response[1])
+        submitBtn.disabled=false
+        submitBtn.style.cursor="pointer"
+        submitBtn.style.opacity="1"
       }
     }
   }

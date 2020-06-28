@@ -125,12 +125,17 @@ class Jobs extends CI_Controller
  }
  public function send_proposal()
  {
+	 if(! get_details('id'))
+	 {
+		 echo json_encode([false,"Please login first"]);
+		 return;
+		 exit();
+	 }
 	$columns = "job_id,seller_user_id,cover_letter,bid_amount";
 	$job_id = $_POST['job_id'];
 	$seller_id =get_details('id');
 	$cover_letter = $_POST['cover_letter'];
 	$amount = $_POST['amount'];
-
 	$values = [$job_id,$seller_id,$cover_letter,$amount];
 	$this->Insert->add_proposal($values);
 	$newProposal =$this->Select->get_content($rows="id",$table="bids",

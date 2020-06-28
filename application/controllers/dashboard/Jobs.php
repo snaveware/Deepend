@@ -65,7 +65,7 @@ class Jobs extends CI_Controller
       $where_condition=true,$where_part ="id = $job_id",
       $order_by ='id DESC',$limit= 10000);
 
-      $columns = "bids.cover_letter,bids.bid_status,bids.bid_amount,users.first_name,users.last_name";
+      $columns = "bids.cover_letter,bids.seller_user_id,bids.bid_status,bids.bid_amount,users.first_name,users.last_name";
       $tables = array('bids','users');
      
       $joining_columns = array('bids.seller_user_id = users.id');
@@ -199,6 +199,12 @@ class Jobs extends CI_Controller
 		$account_type =strtolower(get_details('account_type'));
     if($id && $account_type == "buyer")
 		{
+      $job_id = $_POST['job_id'];
+      $seller_id = $_POST['seller_id'];
+      $amount = $_POST['amount'];
+      $values = array($job_id,$seller_id,$amount);
+      $this->Insert->add_employment($values);
+      echo json_encode([true,'hired']);
     }
     else
     {

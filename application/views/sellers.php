@@ -10,7 +10,7 @@
     
     foreach ($sellers as $seller) {
       ?>
-      <div class="seller" onclick='showSeller("<?= $base_url."sellers/".$seller["id"]?>")'>
+      <div class="seller">
         <img src="<?= $base_url.'assets/images/'.$seller['image']?>" alt="">
         <div>
           <p class="heading-1"style="font-size:15px;"><?= $seller['first_name']?> &nbsp;<?= $seller['last_name']?></p>

@@ -40,5 +40,12 @@ class Insert extends CI_Model
 			VALUES (?,?,?,?)";
 			$this->db->query($sql,$values);
 	}
+	public function add_employment($values)
+	{
+		$columns = "job_id,seller_user_id,employment_amount";
+		$sql = "INSERT INTO employments ($columns)
+			VALUES (?,?,?)";
+			$this->db->query($sql,$values);
+	}
 }//end class
 ?>

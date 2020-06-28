@@ -22,7 +22,7 @@ class Proposals extends CI_Controller
         $where_columns = array("bids.seller_user_id = '$id'");
       }
       
-      $order_by = 'order by jobs.created_on DESC';
+      $order_by = 'order by bids.id DESC';
       $limit = "limit 1000";
 
       $data['proposals']= $this->Select->get_joined_data($columns,$tables,$joining_columns,$order_by,$limit,

@@ -22,7 +22,8 @@ $account_type = strtolower(get_details('account_type'))
 <table id="proposals"class="flexbox-column">
   <?php
   foreach ($proposals as $proposal) 
-  { ?>
+  { 
+    ?>
     <tr>
     <div style="background:white;padding:10px;margin:10px auto;">
         <p>
@@ -37,7 +38,7 @@ $account_type = strtolower(get_details('account_type'))
           <span class="just-text-2">Price</span>
           <span class="just-text-1"><?=$proposal['bid_amount']?></span>
         </p>
-        <center><button class="btn"id="hire" style="text-decoration:none;">Hire This Seller</button></center>
+        <center><button class="btn-3"id="hire" style="text-decoration:none;"onclick="hire('<?=$job[0]['id']?>','<?=$proposal['seller_user_id']?>','<?=$proposal['bid_amount']?>')">Hire This Seller</button></center>
       </div>
     </tr>
     <?php 

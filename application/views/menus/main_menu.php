@@ -8,8 +8,9 @@ $logo=$data[0]['featured_files'];
 	</div>
 	<div class="flexbox-row-nowrap">
 		<ul class="flexbox-row-nowrap list-a">
+		<li><a href="<?=base_url()?>">Home</a></li>
 			<li><a href="<?=base_url()?>jobs">Jobs</a></li>
-			<li><a href="<?=base_url()?>gigs">Gigs</a></li>
+			<!--<li><a href="<?=base_url()?>gigs">Gigs</a></li>-->
 			<li><a href="<?=base_url()?>sellers">Sellers</a></li>                                                                                                       
 		</ul>
 	</div>
