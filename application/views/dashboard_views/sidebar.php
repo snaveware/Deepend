@@ -8,8 +8,11 @@ $rating = get_details('review');
 $rating = show_rating($rating);
 ?>
 <div id="dashboard-sidebar">
+<div class="profile-container">
 <img class="avatar-2" src="<?= base_url().'assets/images/'.$image?>" 
 alt="profile picture">
+<div id="profile-overly"><i id="change-btn"  class="fa fa-edit"></i></div>
+</div>
 <h3 class="heading-2 center"><?=$first_name.' '.$last_name?></h3>
 <h3 class="heading-2 center"><?=$description?></h3>
 <h3 class="heading-2"><?= $rating?></h3>
@@ -29,11 +32,15 @@ alt="profile picture">
 <?php
   if($account_type == "seller")
   {?>
-  <li>
+ <!-- <li>
     <a href="<?=base_url()?>dashboard/gigs">Gigs</a>
-  </li>
+  </li>-->
   <?php
   }
 ?>
 </ul>
 </div>
+<form style="display:none;" >
+<input type="file"name="profile-uploader"id="profile-uploader">
+</form>
+<script src="<?=base_url()?>assets/js/dashboardSidebar.js"></script>

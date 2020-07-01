@@ -13,8 +13,6 @@ class Update extends CI_Model
 		$sql = "UPDATE `$table`
 		SET $columnsPart
 		WHERE $where_part";
-	echo $sql;
-	print_r( $values);
 
 	 if($this->db->query($sql,$values))
 	 {

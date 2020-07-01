@@ -17,6 +17,9 @@
           case 'proposals':
             $this->load->view("dashboard_views/$view",$proposals);
             break;
+          case 'settings':
+            $this->load->view("dashboard_views/$view",$personal_data);
+            break;
           default:
             $this->load->view("dashboard_views/$view");
             break;

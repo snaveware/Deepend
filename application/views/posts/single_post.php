@@ -20,7 +20,7 @@
   <div style="box-shadow:1px 1px 6px var(--base-bg-color-3);width:25vw;min-height:100%!important;margin:30px 0;">
     <img class="avatar-2" src="<?= base_url().'assets/images/'.$job[0]['image']?>" 
     alt="profile picture">
-    <center><a style="text-align:center;width:max-content;text-decoration:none;"class="btn" href="">Submit Proposal</a></center>
+    <center><a style="text-align:center;width:max-content;text-decoration:none;"class="btn" href="<?= base_url().'jobs/new_proposal?id='.$job[0]['id']?>">Submit Proposal</a></center>
   </div>
 </div>
 
@@ -29,4 +29,3 @@
 
 
 ?>
-

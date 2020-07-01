@@ -837,4 +837,24 @@ object-fit: cover;
 	height: max-content;
 	margin: 10px auto;
 }
+.profile-container{
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	position: relative;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: max-content;
+}
+#profile-overly{
+min-height:100% ;
+min-width: 100% ;
+position: absolute;
+background-color: var(--base-bg-color-3);
+opacity:80%;
+border-radius:5px;
+color:var(--base-button-color);
+font-size:5rem;
+}
 
