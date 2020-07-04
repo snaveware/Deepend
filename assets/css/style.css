@@ -453,8 +453,8 @@ list-style-type: none;
 }
 .avatar-2{
 	position: relative;
-	width: 80%;
-	height: 90%;
+	height: 30vh;
+	width:30vh;
 	object-fit: cover;
 	border-radius: 50%;
 	margin: 0 auto;
@@ -570,21 +570,22 @@ list-style-type: none;
 	border-radius: 2px;
 	position: relative;
 }
-#dashboard-content{
-	width:80%;
-	margin:0 5vw 0 40px;
+#dashboard-content,#sellers-content{
+	width:79%;
+	margin:0 auto;
 	background: var(--base-bg-color-1);
 	padding: 0;
 	border-radius: 2px;
 }
-#dashboard-sidebar{
+#dashboard-sidebar,#sellers-sidebar{
 	display: flex;
 	flex-direction: column;
 	margin: 0 auto;
 }
-#dashboard-sidebar h3{
+#dashboard-sidebar h3,#sellers-sidebar h3{
 	text-transform: capitalize;
 	margin: 10px auto;
+	line-height: unset !important;
 }
 #profile-description,#portfolio,#full-portfolio-description-content,#portfolio-editor-container{
 	width: 90%;
@@ -628,7 +629,7 @@ list-style-type: none;
 	color: var(--base-text-color-1);
 	background-color: var(--base-button-color);
 }
-#portfolio li{
+#portfolio li,.portfolios ul li{
 	width: 32%;
 }
 .img-1{
@@ -648,38 +649,30 @@ list-style-type: none;
 	box-shadow: 1px 1px 6px var(--base-bg-color-3);
 }
 #sellers{
-	display:flex;
-	flex-direction:column;
-	flex-wrap: nowrap;
-	align-items: left;
-	width:70vw;
-	height:max-content;
+	width: 60vw;
 	margin:10px auto;
+	padding:0;
 	box-shadow: 1px 1px 6px var(--base-bg-color-3);
+	border-collapse: collapse;
 }
-.seller{
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: space-around;
-	margin:0 auto 5px auto;
-	padding:5px;
-	background-color:var(--base-bg-color-1);
-	width:100%;
-	text-align:left;
-}
-.seller img{
+#sellers tr td img{
 	width:150px;
 	height:150px;
+	border-radius:50%;
 	object-fit: cover;
-	border-radius: 50%;
+	text-align: center;
 }
-.seller div{
-	display:flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	align-items: center;
-	justify-content: flex-start;
+#sellers tr{
+	padding:5px;
+	min-width:100%;
+	display: table-row;
+	
+}
+#sellers tr td{
+	border-bottom: 20px solid var(--base-bg-color-2);
+	padding:5px;
+	background-color: var(--base-bg-color-1);
+	
 }
 #user-jobs-table{
 	width: 100%;
@@ -856,5 +849,22 @@ opacity:80%;
 border-radius:5px;
 color:var(--base-button-color);
 font-size:5rem;
+}
+.profile-description,.portfolios{
+	box-shadow:1px 1px 6px var(--base-bg-color-3);
+	padding:5px;
+	width:95%;
+	margin:10px auto;
+}
+.profile-description h1,.portfolios h1{
+	font-size:2rem !important;
+	text-align:center;
+	margin:5px;
+	padding:0;
+}
+.profile-description p,.portfolios p{
+	padding:10px;
+	width:95%;
+	margin:0 auto;
 }
 
