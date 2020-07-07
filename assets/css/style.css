@@ -265,7 +265,9 @@ list-style-type: none;
 	text-align:center;
 }
 .btn-3{
+	
 	margin-left:10px !important;
+	cursor:pointer;
 }
 .btn-border{
 	border:1px solid var(--base-button-color);
@@ -569,6 +571,7 @@ list-style-type: none;
 	padding: 5px;
 	border-radius: 2px;
 	position: relative;
+
 }
 #dashboard-content,#sellers-content{
 	width:79%;
@@ -866,5 +869,10 @@ font-size:5rem;
 	padding:10px;
 	width:95%;
 	margin:0 auto;
+}
+.proposal{
+	box-shadow:1px 1px 6px var(--base-bg-color-3);
+	width:90% !important;
+	margin:20px auto;
 }
 

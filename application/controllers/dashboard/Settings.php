@@ -19,7 +19,14 @@ class Settings extends CI_Controller
   }
 	public function index()
 	{
-    
+    $data['profiles'] = $this->Select->get_content($rows="id,profile_title",$table="profiles",
+    $where_condition=true,$where_part = "user_id =$this->id",
+    $order_by ='id ASC',$limit= 1000);
+
+    $data['portfolios'] = $this->Select->get_content($rows="id,portfolio_title,images,videos",$table="portfolios",
+    $where_condition=true,$where_part = "user_id =$this->id",
+    $order_by ='id ASC',$limit= 1000);
+
     $data['personal_data'] = $this->personal_data;
     $data['view'] = "settings";
     $this->load->view('dashboard',$data);
@@ -32,7 +39,8 @@ class Settings extends CI_Controller
       $new_personal_data = json_decode($_POST['personal_data']);
       $columns = array();
       $values = array();
-     foreach ($new_personal_data as $key => $value) {
+     foreach ($new_personal_data as $key => $value)
+      {
        if($value != $this->personal_data[0][$key])
        {
         array_push($columns,$key);
@@ -42,8 +50,30 @@ class Settings extends CI_Controller
        {
          continue;
        }
+      }
+      if(count($columns)!=count($values))
+       {
+        echo json_encode([false,'Error saving changes']);
+        return;
+        exit();
+       }
+     for($i=0;$i<count($columns);$i++)
+     {
+       $key = $columns[$i]=="user_description"?'description':$columns[$i];
+       if(isset($_SESSION[$key]))
+       {
+         $_SESSION[$key] = $values[$i];
+       }
+       elseif(isset($_COOKIE[$key]))
+       {
+        setcookie($key,$values[$i],time()+86400*365,'/');
+       }
+       else
+       {
+        continue;
+       }
      }
-     if(count($columns)>0 && count($values)>0)
+     if(count($columns)>0)
      {
       $this->Update->update_data($table="users",$columns,$values,$where_part="id = $this->id");
       echo json_encode([true,$values]);
@@ -66,8 +96,23 @@ class Settings extends CI_Controller
       $columns = array('image');
       $values = array(trim($_POST['profile']));
       $this->Update->update_data($table="users",$columns,$values,$where_part="id = $this->id");
-      $_SESSION['image'] = $_POST['profile'];
+      if(isset($_COOKIE['image']))
+      {
+        setcookie('image',$_POST['profile'],time()+86400*365,'/');
+      }
+      else
+      {
+        $_SESSION['image'] = $_POST['profile'];
+      }
       echo json_encode([true,'changed']);
     }
+  }
+  public function delete_profile($id)
+  {
+    $this->Delete->delete_row($table="profiles",$id);
+  }
+  public function delete_portfolio($id)
+  {
+    $this->Delete->delete_row($table="portfolios",$id);
   }
 }

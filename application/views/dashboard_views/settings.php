@@ -1,7 +1,85 @@
 <?php 
-  //print_r($personal_data);
+  //print_r($portfolios);
 ?>
- <form id="signup-form" style="position:static!important;">
+<style>
+td{
+ border:20px solid #f4f4f4 !important;
+}
+#modal-container{
+  position:absolute;
+  top:0;
+  margin:10px auto;
+  width:100%;
+  border:1px solid green;
+  background-color:white;
+  padding:5px;
+  box-shadow:1px 1px 6px var(--base-bg-color-3);
+}
+#modal{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin:0;
+  
+}
+#modal li{
+    list-style-type:none;
+    width:25%;
+    padding:5px;
+  }
+#modal-close{
+  position:relative;
+  left:95%;
+  top:0;
+  padding:5px;
+  font-size:2rem;
+  cursor:pointer;
+  color:var(--base-button-color);
+  margin:0;
+  padding:0;
+}
+</style>
+<p style="text-align:center;">
+  <span class="btn-3"id="personal-details">Personal Details</span>
+  <span class="btn-3"id="profiles">Profiles</span>
+  <span class="btn-3"id="portfolios">Portfolios</span>
+</p>
+<div id="profiles-element" style="display:none;">
+  <table style="border-collapse:collapse;margin:50px auto;">
+    <?php
+    foreach($profiles as $profile)
+    {?>
+      <tr style="border:20px solid #f4f4f4;">
+        <td class="just-text-1" style="text-transform:capitalize;font-size:1.4rem !important;" ><?=$profile['profile_title']?></td>
+        <td class="btn-3"onclick="deleteProfile(event,'<?=$profile['id']?>')">Delete Profile</td>
+    </tr>
+      <?php
+    }?>
+  </table>
+</div>
+
+<div id="portfolios-element" style="display:none;position:relative;">
+  <table style="border-collapse:collapse;margin:50px auto;">
+    <?php
+    foreach($portfolios as $portfolio)
+    {?>
+      <tr style="border:20px solid #f4f4f4;">
+        <td class="just-text-1" style="text-transform:capitalize;font-size:1.4rem !important;" ><?=$portfolio['portfolio_title']?></td>
+        <td class="btn-3"onclick="deletePortfolio(event,'<?=$portfolio['id']?>')">Delete portfolio</td>
+        <td class="btn-3"onclick="showPortfolioImages(event,'<?=$portfolio['images']?>','<?=$portfolio['id']?>')">Images</td>
+        <td class="btn-3" onclick="showPortfolioVideos(event,'<?=$portfolio['videos']?>','<?=$portfolio['id']?>')">Videos</td>
+    </tr>
+      <?php
+    }?>
+  </table>
+  <div id="modal-container"style="display:none;">
+    <p id="modal-close">&times;</p>
+    <ul id="modal">
+      
+    </ul>
+  </div>
+</div>
+ <form id="signup-form" >
     <div class="name">
       <p>
       <span>Name</span>

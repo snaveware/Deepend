@@ -53,7 +53,7 @@ if(!count($profiles) <1 )
 				{
 					foreach ($general_profile_portfolios as $portfolio ) 
 					{
-						$image = create_array($portfolio['images'],'|','first');
+						$image =empty($portfolio['images'])?'deepend-landing.png': create_array($portfolio['images'],'|','first');
 						?> 
 						<li id="<?=$portfolio['portfolio_title']?>" portfolio-id="<?=$portfolio['id'] ?>" onclick="showPortfolio(event)">
 							<img class="img-1" src="<?= base_url()."assets/images/".$image?>" 

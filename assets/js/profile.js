@@ -1,7 +1,7 @@
 let activeProfile = document.getElementById('profiles-list').firstElementChild.getAttribute('id');
 let activeProfileId=document.getElementById('profiles-list').firstElementChild.getAttribute('profile-id');
 var descriptionMore = document.getElementById('description-more');
-let baseUrl = document.getElementById('base-url').innerHTML;
+let siteUrl = document.getElementById('base-url').innerHTML;
 let editor;
 let porfolioDescriptionEditor;
 let portfolioTitle;
@@ -28,7 +28,7 @@ function showProfile(event)
 	document.getElementById(activeProfile).classList.add('active-2');
 	let id = parseInt(event.target.getAttribute('profile-id'));
 	xhr = new XMLHttpRequest;
-	xhr.open('get',`${baseUrl}profile/get?id=${id}`);
+	xhr.open('get',`${siteUrl}profile/get?id=${id}`);
 	xhr.onreadystatechange = function()
 	{
 		if(this.readyState==4 && this.status==200)
@@ -54,7 +54,7 @@ function showProfile(event)
 				portfolio.setAttribute('onclick','showPortfolio(event)');
 				let images = profileData[1][i].images.split('|');
 				portfolio.innerHTML=
-				`<img class="img-1" src="${baseUrl}assets/images/${images[0]}" 
+				`<img class="img-1" src="${siteUrl}assets/images/${images[0]}" 
 				alt="portfolio image">
 				<p class="heading-2">${profileData[1][i].portfolio_title}</p>`;
 				portfolioList.appendChild(portfolio);
@@ -93,7 +93,7 @@ function add(table="profiles")
 		console.log(data);
 		xhr = new XMLHttpRequest;
 
-		xhr.open('POST',`${baseUrl}profile/add`,true);
+		xhr.open('POST',`${siteUrl}profile/add`,true);
 		xhr.onreadystatechange = function()
 		{
 			if(this.readyState == 4 && this.status == 200)
@@ -150,7 +150,7 @@ function createImageLists(images)
 			lists +=
 			`
 			<li>
-				<img class="img-1" src="${baseUrl}assets/images/${images[i]}">
+				<img class="img-1" src="${siteUrl}assets/images/${images[i]}">
 			</li>
 			`
 		}
@@ -167,7 +167,7 @@ function createVideoLists(videos)
 			lists +=
 			`
 			<li>
-				<video class="img-1" src="${baseUrl}assets/videos/${videos[i]}" controls Autoplay muted></video>
+				<video class="img-1" src="${siteUrl}assets/videos/${videos[i]}" controls Autoplay muted></video>
 			</li>
 			`
 		}
@@ -195,7 +195,7 @@ function edit(event)
 			let	xhr = new XMLHttpRequest;
 			let value= `${editor.getData()}`;
 			
-			xhr.open('post',`${baseUrl}profile/update`,true);
+			xhr.open('post',`${siteUrl}profile/update`,true);
 			xhr.onreadystatechange = function()
 			{
 				if(this.readyState == 4 && this.status == 200)
@@ -223,7 +223,7 @@ function showPortfolio(event)
 	portfolioTitle = id;
 	activePortfolioId=id;
  	let	xhr = new XMLHttpRequest;
-	xhr.open('get',`${baseUrl}profile/get?table=portfolios&id=${id}`,true);
+	xhr.open('get',`${siteUrl}profile/get?table=portfolios&id=${id}`,true);
 	xhr.onreadystatechange = function()
 	{
 		if(this.readyState == 4 && this.status == 200)
@@ -382,7 +382,7 @@ function editPortfolio(event)
 			let	xhr = new XMLHttpRequest;
 			let portfolioDescriptionvalue= porfolioDescriptionEditor.getData();
 			console.log(portfolioDescriptionvalue);
-			xhr.open('post',`${baseUrl}profile/update`,true);
+			xhr.open('post',`${siteUrl}profile/update`,true);
 			xhr.onreadystatechange = function()
 			{
 				if(this.readyState == 4 && this.status == 200)
@@ -397,7 +397,7 @@ function editPortfolio(event)
 				}
 			}
 			xhr.setRequestHeader('content-type','application/x-www-form-urlencoded')
-			xhr.send(`table=portfolios&title=${portfolioTitle}&value=${portfolioDescriptionvalue}&column=portfolio_description`);
+			xhr.send(`table=portfolios&title=${portfolioTitle}&value=${portfolioDescriptionvalue}&column=portfolio_description&id=${activePortfolioId}`);
 		});
 		event.target.parentNode.appendChild(save);
 	}
@@ -411,15 +411,16 @@ function addPortfolioItem()
 function updatePortfolioImages(newValue)
 {
 	xhr = new XMLHttpRequest;
-	xhr.open('post',`${baseUrl}profile/update`,'true')
+	xhr.open('post',`${siteUrl}profile/update`,'true')
 	xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
 	console.log(activePortfolioId);
 	xhr.send(`table=portfolios&column=images&value=${newValue}&id=${activePortfolioId}`);
 }
+
 function updatePortfolioVideos(newValue)
 {
 	xhr = new XMLHttpRequest;
-	xhr.open('post',`${baseUrl}profile/update`,'true')
+	xhr.open('post',`${siteUrl}profile/update`,'true')
 	xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
 	console.log(activePortfolioId);
 	xhr.send(`table=portfolios&column=videos&value=${newValue}&id=${activePortfolioId}`);
@@ -432,7 +433,7 @@ function upload(e)
 	let formData = new FormData();
 	formData.append('file',file);
 	xhr= new XMLHttpRequest;
-	xhr.open('post',`${baseUrl}upload`,true);
+	xhr.open('post',`${siteUrl}upload`,true);
 	xhr.onreadystatechange= function()
 	{
 		if(this.readyState==4 &&this.status==200)
@@ -442,12 +443,12 @@ function upload(e)
 			if(data.upload_data.file_type.search('image') !=-1)
 			{
 				let newImages;
-				console.log('image string: '+imagesString);
-				newImages=`${imagesString}|${data.upload_data.file_name}`;
+				newImages=imagesString?`${imagesString}|${data.upload_data.file_name}`:`${data.upload_data.file_name}`;
 				imagesString=newImages;
+				console.log(newImages)
 				updatePortfolioImages(newImages);
 				let newImage = document.createElement('li');
-				newImage.innerHTML=`<img class="img-1" src="${baseUrl}assets/images/${data.upload_data.file_name}">`
+				newImage.innerHTML=`<img class="img-1" src="${siteUrl}assets/images/${data.upload_data.file_name}">`
 				let imageList =document.getElementById('full-portfolio-images')
 				let lastChild = imageList.lastElementChild;
 				imageList.lastElementChild.remove();
@@ -457,12 +458,11 @@ function upload(e)
 			else if(data.upload_data.file_type.search('video') !=-1)
 			{
 				let newVideos;
-				console.log('image string: '+videosString);
-				newVideos=`${videosString}|${data.upload_data.file_name}`;
+				newVideos=videosString?`${videosString}|${data.upload_data.file_name}`:`${data.upload_data.file_name}`;
 				videosString=newVideos;
 				updatePortfolioVideos(newVideos);
 				let newVideo = document.createElement('li');
-				newVideo.innerHTML=`<video class="img-1" src="${baseUrl}assets/videos/${data.upload_data.file_name}" controls Autoplay muted></video>`
+				newVideo.innerHTML=`<video class="img-1" src="${siteUrl}assets/videos/${data.upload_data.file_name}" controls Autoplay muted></video>`
 				let videoList=document.getElementById('full-portfolio-videos')
 				let lastChild = videoList.lastElementChild;
 				videoList.lastElementChild.remove();

@@ -38,7 +38,8 @@ class Profile extends CI_Controller
 		$id = get_details('id');
 		$columns=array($_POST['column']);
 		$values=array($_POST['value']);
-		$this->Update->update_data($table,$columns,$values,"user_id = $id and id=$_POST[id]");
+		$item_id = $_POST['id'];
+		$this->Update->update_data($table,$columns,$values,"user_id = $id and id=$item_id");
 	}
 	function add()
 	{

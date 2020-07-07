@@ -26,5 +26,6 @@
         }?>
       </section>
       </div>
-      <?php $this->load->view('footer')?>
       <script src="<?=base_url()?>assets/js/profile.js"></script>
+      <?php $this->load->view('footer')?>
+      

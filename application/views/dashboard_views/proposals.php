@@ -2,11 +2,11 @@
 $account_type = strtolower(get_details('account_type'))
 ?>
 </style>
-<table id="proposals"class="flexbox-column">
+<section id="proposals"class="flexbox-column">
   <?php
   foreach ($proposals as $proposal) 
   { ?>
-    <tr>
+    <div class="proposal">
       <p style="background-color:green;color:white;text-align:center;">
       <span>Job ID</span>
       <span><?=$proposal['job_id']?></span>
@@ -32,9 +32,9 @@ $account_type = strtolower(get_details('account_type'))
         <span class="just-text-2">Price</span>
         <span class="just-text-1"><?=$proposal['bid_amount']?></span>
       </p>
-    </tr>
+    </div>
     <?php 
   }
   ?>
-</table>
+</section>
 <?php //print_r($proposals)?>

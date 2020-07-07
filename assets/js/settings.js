@@ -15,6 +15,15 @@ const genderMaleBtn = document.getElementById('male')
 const genderFemaleBtn = document.getElementById('female')
 const genderOtherBtn = document.getElementById('other')
 const base = document.getElementById('base-url').innerHTML
+const personalDetailsBtn = document.getElementById('personal-details')
+const profilesBtn = document.getElementById("profiles")
+const profilesElement = document.getElementById('profiles-element')
+const personalDetailsForm=document.getElementById('signup-form')
+const portfoliosBtn = document.getElementById('portfolios')
+const portfoliosElement = document.getElementById('portfolios-element')
+const modalContainerCloseBtn = document.getElementById('modal-close')
+let originalImagesArray;
+let originalVideosArray;
 
 genderContainer.addEventListener('click',e => {
   let display = genderList.style.display
@@ -59,6 +68,7 @@ form.addEventListener('submit',e=>{
       if(response[0])
       {
         alert('Saved successfully')
+        window.location.reload();
       }
       else
       {
@@ -69,5 +79,157 @@ form.addEventListener('submit',e=>{
   xhr.setRequestHeader('content-type','application/x-www-form-urlencoded')
   xhr.send(`personal_data=${JSON.stringify(personalDetails)}`)
 })
+function deleteProfile(event,id)
+{
+
+  let isSure= confirm(`Are you sure you want to delete ${event.target.previousSibling.previousSibling.innerHTML} profile`)
+  if(!isSure)
+  {
+    return;
+  }
+  xhr = new XMLHttpRequest
+  xhr.open('post',`${base}dashboard/settings/delete_profile/${id}`,true)
+  xhr.setRequestHeader('content-type','application/x-www-form-urlencoded')
+  xhr.onreadystatechange = function()
+  {
+    if(this.status == 200 && this.readyState == 4)
+    {
+      response = this.responseText
+      console.log(response)
+      event.target.parentNode.remove();
+    }
+  }
+  xhr.send()
+}
+
+function deletePortfolio(event,id)
+{
+
+  let isSure= confirm(`Are you sure you want to delete ${event.target.previousSibling.previousSibling.innerHTML} portfolio`)
+  if(!isSure)
+  {
+    return;
+  }
+  xhr = new XMLHttpRequest
+  xhr.open('post',`${base}dashboard/settings/delete_portfolio/${id}`,true)
+  xhr.setRequestHeader('content-type','application/x-www-form-urlencoded')
+  xhr.onreadystatechange = function()
+  {
+    if(this.status == 200 && this.readyState == 4)
+    {
+      response = this.responseText
+      console.log(response)
+      event.target.parentNode.remove();
+    }
+  }
+  xhr.send()
+}
+personalDetailsBtn.addEventListener('click',()=>{
+  profilesElement.style.display="none"
+  portfoliosElement.style.display="none"
+  personalDetailsForm.style.display="block";
+
+})
+profilesBtn.addEventListener('click',()=>{
+  personalDetailsForm.style.display="none"
+  portfoliosElement.style.display="none"
+  profilesElement.style.display="block"
+  
+})
+portfoliosBtn.addEventListener('click',()=>{
+  personalDetailsForm.style.display="none"
+  profilesElement.style.display="none"
+  portfoliosElement.style.display="block"
+  
+})
+
+function showPortfolioImages(event,imagesString,id)
+{
+  let modalContainer = document.getElementById('modal-container')
+  let modal = document.getElementById('modal')
+  let imagesArray = imagesString.trim().split('|')
+  originalImagesArray = imagesArray;
+  for (const i in originalImagesArray) 
+  {
+    let newItem = document.createElement('li')
+    newItem.innerHTML= `<img class="avatar-2" src="${base}assets/images/${imagesArray[i]}">
+    <p style="position:relative;left:46%;"class="btn-3 fa fa-trash"onclick="deletePortfolioImage(event,'${id}','${i}')"></p>`
+    modal.appendChild(newItem)
+    modalContainer.style.display="block"
+  }
+}
+
+function showPortfolioVideos(event,videosString,id)
+{
+  let modalContainer = document.getElementById('modal-container')
+  let modal = document.getElementById('modal')
+  let videosArray =videosString.trim().split('|')
+  originalVideosArray = videosArray;
+  for (const i in originalVideosArray) 
+  {
+    let newItem = document.createElement('li')
+    newItem.innerHTML= `<video class="avatar-2" src="${base}assets/videos/${videosArray[i]}" autoplay muted loop></video>
+    <p style="position:relative;left:46%;"class="btn-3 fa fa-trash"onclick="deletePortfolioVideo(event,'${id}','${i}')"></p>`
+    modal.appendChild(newItem)
+    modalContainer.style.display="block"
+  }
+}
+modalContainerCloseBtn.addEventListener('click',e=>{
+  modal = document.getElementById('modal')
+  e.target.parentNode.style.display="none"
+  modal.innerHTML=''
+})
+
+function deletePortfolioImage(event,id,index)
+{
+  
+  let isSure= confirm(`Are you sure you want to delete this image`)
+  if(!isSure)
+  {
+    return;
+  }
+  originalImagesArray.splice(index,1)
+  console.log(originalImagesArray)
+  let newImagesString  = originalImagesArray.join('|')
+  xhr = new XMLHttpRequest
+  xhr.open('post',`${base}profile/update`,true)
+  xhr.setRequestHeader('content-type','application/x-www-form-urlencoded')
+  xhr.onreadystatechange = function()
+  {
+    if(this.status == 200 && this.readyState == 4)
+    {
+      response = this.responseText
+      console.log(response)
+      event.target.parentNode.remove();
+    }
+  }
+  xhr.send(`table=portfolios&column=images&value=${newImagesString}&id=${id}`);
+}
+
+function deletePortfolioVideo(event,id,index)
+{
+  
+  let isSure= confirm(`Are you sure you want to delete this video?`)
+  if(!isSure)
+  {
+    return;
+  }
+  originalVideosArray.splice(index,1)
+  console.log(originalVideosArray)
+  let newVideosString  = originalVideosArray.join('|')
+  xhr = new XMLHttpRequest
+  xhr.open('post',`${base}profile/update`,true)
+  xhr.setRequestHeader('content-type','application/x-www-form-urlencoded')
+  xhr.onreadystatechange = function()
+  {
+    if(this.status == 200 && this.readyState == 4)
+    {
+      response = this.responseText
+      console.log(response)
+      event.target.parentNode.remove();
+    }
+  }
+  xhr.send(`table=portfolios&column=videos&value=${newVideosString}&id=${id}`);
+}
 
 
