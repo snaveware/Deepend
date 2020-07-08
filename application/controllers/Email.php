@@ -1,7 +1,7 @@
 <?php 
 session_start();
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Profile extends CI_Controller
+class Email extends CI_Controller
 {
 	function __construct()
 	{
