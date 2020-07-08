@@ -13,6 +13,11 @@ class Mail extends CI_Controller
     $this->email->subject('Testing email module');
     $this->email->message('<p>sending email at deepend using smtp mailer</p>');
 
-    $this->email->send();
+    if($this->email->send())
+    {
+      echo"email sent";
+    }else{
+      echo"not sent";
+    }
   }
 }
