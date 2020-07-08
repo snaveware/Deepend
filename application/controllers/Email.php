@@ -12,8 +12,9 @@ class Email extends CI_Controller
   function index()
   {
     $config['protocol']    = 'smtp';
-    $config['smtp_host']    = 'ssl://smtp.gmail.com';
-    $config['smtp_port']    = '465';
+    $config['smtp_host']    = 'smtp.gmail.com';
+    $config['smtp_crypto']    = 'tls';
+    $config['smtp_port'] = 587;
     $config['smtp_timeout'] = '7';
     $config['smtp_user']    = 'work.evans020@gmail.com';
     $config['smtp_pass']    = 'Je_taime20449682';
