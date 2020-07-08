@@ -6,6 +6,7 @@
   $config['smtp_port'] = 25;
   $config['smtp_timeout'] = 10;
   $config['smtp_crypto'] = "tls";
+  
   $config['mailtype'] = "html";
 
 
