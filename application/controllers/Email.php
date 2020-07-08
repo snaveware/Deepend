@@ -5,7 +5,7 @@ class Email extends CI_Controller
 {
 	function __construct()
 	{
-      parent::Controller();   
+      parent::__construct();   
       $this->load->library('email');
   }
 
