@@ -1,8 +1,10 @@
-<?php
-class Email extends Controller {
-
-  function Email()
-  {
+<?php 
+session_start();
+defined('BASEPATH') OR exit('No direct script access allowed');
+class Profile extends CI_Controller
+{
+	function __construct()
+	{
       parent::Controller();   
       $this->load->library('email');
   }
@@ -28,6 +30,12 @@ class Email extends Controller {
     $this->email->subject('Email Test');
     $this->email->message('Testing the email class.');  
 
-    $this->email->send();
+    if($this->email->send())
+    {
+      echo "sent";
+    }
+    else{
+      echo"not sent";
+    }
   }
 }
