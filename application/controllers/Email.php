@@ -31,12 +31,12 @@ class Email extends CI_Controller
     $this->email->subject('Email Test');
     $this->email->message('Testing the email class.');  
 
-    if($this->email->send())
-    {
-      echo "sent";
+    try {
+      $this->email->send();
+    } catch (exception $e) {
+      echo $e->getMessage();
     }
-    else{
-      echo"not sent";
-    }
+    
+    
   }
 }
