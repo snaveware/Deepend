@@ -24,7 +24,37 @@ const portfoliosElement = document.getElementById('portfolios-element')
 const modalContainerCloseBtn = document.getElementById('modal-close')
 let originalImagesArray;
 let originalVideosArray;
-
+function getPortfolioMedia(id,column="images")
+{
+  let xhr = new XMLHttpRequest
+  if(column =='images')
+  {
+    xhr.open('post',`${base}dashboard/settings/get_portfolio_images/${id}`,true)
+  }
+  else
+  {
+    xhr.open('post',`${base}dashboard/settings/get_portfolio_videos/${id}`,true)
+  }
+  
+  xhr.onreadystatechange = function()
+  {
+    if(this.status==200 && this.readyState ==4)
+    {
+      let response = JSON.parse(this.responseText)
+      if(column=='images')
+      {
+        originalImagesArray = response.trim().split('|')
+      }
+      else
+      {
+        originalVideosArray=response.trim().split('|')
+      }
+      
+    }
+  }
+  xhr.setRequestHeader('content-type','application/x-www-form-urlencoded')
+  xhr.send()
+}
 genderContainer.addEventListener('click',e => {
   let display = genderList.style.display
   if(display !=="block")
@@ -143,13 +173,13 @@ portfoliosBtn.addEventListener('click',()=>{
   
 })
 
-function showPortfolioImages(event,imagesString,id)
+function showPortfolioImages(event,id)
 {
+  getPortfolioMedia(id,'images')
   let modalContainer = document.getElementById('modal-container')
   let modal = document.getElementById('modal')
-  let imagesArray = imagesString.trim().split('|')
-  originalImagesArray = imagesArray;
-  for (const i in originalImagesArray) 
+  let imagesArray = originalImagesArray
+  for (const i in imagesArray) 
   {
     let newItem = document.createElement('li')
     newItem.innerHTML= `<img class="avatar-2" src="${base}assets/images/${imagesArray[i]}">
@@ -159,13 +189,13 @@ function showPortfolioImages(event,imagesString,id)
   }
 }
 
-function showPortfolioVideos(event,videosString,id)
+function showPortfolioVideos(event,id)
 {
+  getPortfolioMedia(id,'videos')
   let modalContainer = document.getElementById('modal-container')
   let modal = document.getElementById('modal')
-  let videosArray =videosString.trim().split('|')
-  originalVideosArray = videosArray;
-  for (const i in originalVideosArray) 
+  let videosArray =originalVideosArray
+  for (const i in videosArray) 
   {
     let newItem = document.createElement('li')
     newItem.innerHTML= `<video class="avatar-2" src="${base}assets/videos/${videosArray[i]}" autoplay muted loop></video>

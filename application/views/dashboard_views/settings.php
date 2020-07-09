@@ -66,8 +66,8 @@ td{
       <tr style="border:20px solid #f4f4f4;">
         <td class="just-text-1" style="text-transform:capitalize;font-size:1.4rem !important;" ><?=$portfolio['portfolio_title']?></td>
         <td class="btn-3"onclick="deletePortfolio(event,'<?=$portfolio['id']?>')">Delete portfolio</td>
-        <td class="btn-3"onclick="showPortfolioImages(event,'<?=$portfolio['images']?>','<?=$portfolio['id']?>')">Images</td>
-        <td class="btn-3" onclick="showPortfolioVideos(event,'<?=$portfolio['videos']?>','<?=$portfolio['id']?>')">Videos</td>
+        <td class="btn-3"onclick="showPortfolioImages(event,'<?=$portfolio['id']?>')">Images</td>
+        <td class="btn-3" onclick="showPortfolioVideos(event,'<?=$portfolio['id']?>')">Videos</td>
     </tr>
       <?php
     }?>

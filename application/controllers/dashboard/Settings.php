@@ -115,4 +115,18 @@ class Settings extends CI_Controller
   {
     $this->Delete->delete_row($table="portfolios",$id);
   }
+  public function get_portfolio_images($id)
+  {
+    $images = $this->Select->get_content($rows="images",$table="portfolios",
+    $where_condition=true,$where_part = "id =$id",
+    $order_by ='id ASC',$limit= 1000);
+    echo json_encode($images[0]['images']);
+  }
+  public function get_portfolio_videos($id)
+  {
+    $videos = $this->Select->get_content($rows="videos",$table="portfolios",
+    $where_condition=true,$where_part = "id =$id",
+    $order_by ='id ASC',$limit= 1);
+    echo json_encode($videos[0]['videos']);
+  }
 }
