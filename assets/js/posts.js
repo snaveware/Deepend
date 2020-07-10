@@ -118,6 +118,7 @@ function showPage(event)
 	}
 	document.getElementById('posts').innerHTML = "";
 	document.getElementById('pagination').innerHTML = "";
+	document.getElementById('loader').style.display ="block";
 	createPosts(page,postPerPage,category);
 }
 function showJob(event,id)
@@ -153,7 +154,7 @@ function createPosts(thePage,theQuantity,theCategory,theKeywordsRegex = undefine
 				let theSkills = showSkills(skillsArray)
 				let rating = showRating(posts[i].review);
 	
-				document.getElementById('loader').style.display ="none";
+				
 	
 				let post = document.createElement('div');
 				post.classList.add('a-post');
@@ -251,6 +252,7 @@ function createPosts(thePage,theQuantity,theCategory,theKeywordsRegex = undefine
 	
 				postFooter.appendChild(postFooterUl);
 				post.appendChild(postFooter);
+				document.getElementById('loader').style.display ="none";
 				singlePost.appendChild(post);
 	
 			} //end for
@@ -314,6 +316,7 @@ function createPosts(thePage,theQuantity,theCategory,theKeywordsRegex = undefine
 	xhr.send();
 }
 //creating the posts
+document.getElementById('loader').style.display ="block";
 createPosts(page,postPerPage,category);
 
 //functionality for search field
@@ -340,6 +343,7 @@ searchForm.addEventListener('submit',e=>{
 	}
 	document.getElementById('posts').innerHTML = "";
 	document.getElementById('pagination').innerHTML = "";
+	document.getElementById('loader').style.display ="block";
 	createPosts(page,postPerPage,category,keywordRegex);
 });
 
@@ -352,6 +356,7 @@ categorySetterForm.addEventListener('submit',e=>
 	category = categorySetter.value;
 	document.getElementById('posts').innerHTML = "";
 	document.getElementById('pagination').innerHTML = "";
+	document.getElementById('loader').style.display ="block";
 	createPosts(page,postPerPage,category);
 });
 
@@ -364,6 +369,7 @@ quantitySetterForm.addEventListener('submit',e=>
 	postPerPage = quantitySetter.value;
 	document.getElementById('posts').innerHTML = "";
 	document.getElementById('pagination').innerHTML = "";
+	document.getElementById('loader').style.display ="block";
 	createPosts(page,postPerPage,category);
 });
 
