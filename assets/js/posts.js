@@ -357,6 +357,10 @@ categorySetterForm.addEventListener('submit',e=>
 	document.getElementById('posts').innerHTML = "";
 	document.getElementById('pagination').innerHTML = "";
 	document.getElementById('loader').style.display ="block";
+	if(category =='' || category ==' ')
+	{
+		category = "*"
+	}
 	createPosts(page,postPerPage,category);
 });
 
