@@ -471,7 +471,8 @@ list-style-type: none;
 	position: absolute;
 	z-index: 10;
 	top: 14%;
-	left: 32.8%;
+	left: 50%;
+	transform: translateX(-50%);
 	height: max-content;
 	width: 35vw;
 	background-color: var(--base-bg-color-1);
@@ -716,7 +717,7 @@ list-style-type: none;
 #signup-image-container img{
 width: 100%;
 height:100%;
-object-fit: cover;
+object-fit: contain;
 }
 #signup-form,#new-job-form,#proposal-form{
 	padding-left:3vw;
@@ -874,5 +875,20 @@ font-size:5rem;
 	box-shadow:1px 1px 6px var(--base-bg-color-3);
 	width:90% !important;
 	margin:20px auto;
+}
+
+@media only screen and (max-width: 768px)
+{
+	#posts,#job-posts,#single-post,.a-post,#signup-form{
+		width:100vw !important;
+	}
+	#signup-image-container{
+		display:none;
+	}
+	#login-form,.input-section{
+		width:100%;
+	}
+	
+	
 }
 

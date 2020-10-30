@@ -1,7 +1,7 @@
 <?php $this->load->view('head'); ?>
 <div class="flexbox-row-nowrap"id="signup">
   <div id="signup-image-container">
-  <img src="<?= base_url() ?>assets/images/join.png" alt="illustration of girl working">
+  <img src="<?= base_url() ?>assets/images/join.jpg" alt="illustration of girl working">
   </div>
   <form id="signup-form" >
     
